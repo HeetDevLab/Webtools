@@ -1,23 +1,23 @@
 particlesJS("particles-js", {
   particles: {
-    number: { value: 60 },
-    size: { value: 3 },
-    color: { value: "#00c3ff" },
+    number: { value: 70 },
+    size: { value: 2.5 },
+    color: { value: "#1fa2ff" },
     line_linked: {
       enable: true,
-      distance: 150,
-      color: "#00c3ff",
-      opacity: 0.4,
+      distance: 140,
+      color: "#1fa2ff",
+      opacity: 0.3,
       width: 1
     },
     move: {
       enable: true,
-      speed: 2
+      speed: 1.5
     }
   },
   interactivity: {
     events: {
-      onhover: { enable: true, mode: "repulse" }
+      onhover: { enable: true, mode: "grab" }
     }
   }
 });
