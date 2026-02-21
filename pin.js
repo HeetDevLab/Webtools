@@ -24,10 +24,12 @@ function generatePIN() {
 }
 
 function copyPIN() {
-  if (pinOutput.value === "") return;
+  const pinField = document.getElementById("pinOutput");
+  if(pinField.value === "") return;
 
-  navigator.clipboard.writeText(pinOutput.value);
+  navigator.clipboard.writeText(pinField.value);
 
+  const copyBtn = event.target;
   copyBtn.textContent = "Copied ✓";
 
   setTimeout(() => {
