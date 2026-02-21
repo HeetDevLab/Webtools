@@ -60,34 +60,35 @@ body {
   gap: 30px;
 }
 /* NAVBAR */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(5, 8, 22, 0.9);
-  backdrop-filter: blur(8px);
-  padding: 15px 0;
-  text-align: center;
-  z-index: 1000;
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+padding:14px;
+display:flex;
+justify-content:center;
+gap:25px;
+z-index:1000;   /* IMPORTANT */
 }
 
-.navbar a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.3s;
-  background: rgba(5, 8, 22, 0.75);
-  backdrop-filter: blur(12px);
-  padding: 12px 0;
+.navbar a{
+color:white;
+text-decoration:none;
+font-weight:bold;
 }
+
+.navbar a:hover{
+color:#0b5cff;
+}
+
 .navbar a:nth-child(3) {
   color: #2ea8ff;
   font-weight: 600;
 }
-.navbar a:hover {
-  color: #2ea8ff;
-}
+
 /* CARD */
 /* Make cards slightly glass */
 .tool-card {
