@@ -121,3 +121,23 @@ body {
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 80px 5%;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .tools-grid {
+    padding: 40px 5%;
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 20px;
+  }
+
+}
