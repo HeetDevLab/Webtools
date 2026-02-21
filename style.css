@@ -78,7 +78,9 @@ body {
   font-size: 14px;
   transition: 0.3s;
 }
-
+.navbar a:nth-child(3) {
+  color: #2ea8ff;
+}
 .navbar a:hover {
   color: #2ea8ff;
 }
