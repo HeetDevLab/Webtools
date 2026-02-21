@@ -180,3 +180,14 @@ body {
   border-radius: 5px;
   transition: width 0.4s ease, background 0.4s ease;
 }
+#suggestions {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ffcc00;
+  text-shadow: 0 0 5px rgba(255,204,0,0.4);
+}
+#crackTime {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #2ea8ff;
+}
