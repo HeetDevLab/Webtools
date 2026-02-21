@@ -220,6 +220,18 @@ color:#0b5cff;
   margin-top: 5px;
   color: #2ea8ff;
 }
+
+
+/* PIN CARD */
+.pin-card {
+  background: rgba(15,25,60,0.35);
+  border: 1px solid rgba(46,168,255,0.3);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  margin-top: 30px;
+  transition: 0.3s ease;
+}
 .pin-box input {
   width: 100%;
   padding: 12px;
@@ -232,6 +244,22 @@ color:#0b5cff;
   margin: 15px 0;
 }
 
+.pin-card:hover {
+  box-shadow: 0 0 25px rgba(31,162,255,0.6);
+}
+
+.pin-card input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #2ea8ff;
+  background: rgba(15,25,60,0.6);
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
 .controls {
   display: flex;
   gap: 10px;
@@ -240,7 +268,12 @@ color:#0b5cff;
 }
 
 select {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
+}
+
+#copyMsg {
+  margin-top: 10px;
+  color: #00ff88;
 }
