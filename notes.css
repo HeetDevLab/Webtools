@@ -151,5 +151,44 @@
   margin-top: 10px;
   color: #00ff88;
 }
+.note-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(46,168,255,0.08);
+  border-radius: 10px;
+}
 
+.note-name {
+  font-weight: bold;
+  color: #2ea8ff;
+}
+
+.mini-pass {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #2ea8ff;
+  background: rgba(15,25,60,0.6);
+  color: white;
+}
+
+.mini-btn {
+  padding: 6px;
+  border-radius: 8px;
+  border: none;
+  background: #2ea8ff;
+  color: black;
+  cursor: pointer;
+}
+
+.delete-btn {
+  padding: 6px;
+  border-radius: 8px;
+  border: none;
+  background: #ff4444;
+  color: white;
+  cursor: pointer;
+}
 /* Mobile */
