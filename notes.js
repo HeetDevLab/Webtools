@@ -1,3 +1,5 @@
+console.log("Notes JS Loaded");
+
 const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const clearBtn = document.getElementById("clearBtn");
@@ -10,7 +12,9 @@ const statusMsg = document.getElementById("statusMsg");
 
 let currentNote = null;
 
-saveBtn.addEventListener("click", async () => {
+/* SAVE NOTE */
+saveBtn.addEventListener("click", () => {
+
   const title = noteTitle.value.trim();
   const content = noteArea.value;
   const password = notePassword.value;
@@ -20,29 +24,74 @@ saveBtn.addEventListener("click", async () => {
     return;
   }
 
-  const encrypted = await encrypt(content, password);
   let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
 
-  notes[title] = encrypted;
+  notes[title] = {
+    text: content,
+    password: password
+  };
+
   localStorage.setItem("secureNotes", JSON.stringify(notes));
 
+  statusMsg.textContent = "Saved!";
   loadNotesList();
-  statusMsg.textContent = "Encrypted & Saved!";
 });
 
+/* LOAD LIST */
+function loadNotesList() {
+
+  notesList.innerHTML = "";
+  let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
+
+  Object.keys(notes).forEach(title => {
+
+    const li = document.createElement("li");
+    li.textContent = title;
+
+    li.onclick = () => {
+
+      const enteredPassword = notePassword.value;
+
+      if (!enteredPassword) {
+        statusMsg.textContent = "Enter password first!";
+        return;
+      }
+
+      if (enteredPassword === notes[title].password) {
+        noteTitle.value = title;
+        noteArea.value = notes[title].text;
+        currentNote = title;
+        statusMsg.textContent = "Loaded!";
+      } else {
+        statusMsg.textContent = "Wrong password!";
+      }
+
+    };
+
+    notesList.appendChild(li);
+  });
+
+}
+
+/* DELETE */
 deleteBtn.addEventListener("click", () => {
-  if (!currentNote) return;
+
+  if (!currentNote) {
+    statusMsg.textContent = "Select note first!";
+    return;
+  }
 
   let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
-  delete notes[currentNote];
 
+  delete notes[currentNote];
   localStorage.setItem("secureNotes", JSON.stringify(notes));
 
   clearFields();
   loadNotesList();
-  statusMsg.textContent = "Note Deleted!";
+  statusMsg.textContent = "Deleted!";
 });
 
+/* CLEAR */
 clearBtn.addEventListener("click", clearFields);
 
 function clearFields() {
@@ -52,63 +101,8 @@ function clearFields() {
   currentNote = null;
 }
 
-function loadNotesList() {
-  notesList.innerHTML = "";
-  let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
-
-  Object.keys(notes).forEach(title => {
-    const li = document.createElement("li");
-    li.textContent = title;
-    li.onclick = () => loadNote(title);
-    notesList.appendChild(li);
-  });
-}
-
-async function loadNote(title) {
-  const password = notePassword.value;
-  if (!password) {
-    statusMsg.textContent = "Enter password first!";
-    return;
-  }
-
-  let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
-  const encrypted = notes[title];
-
-  try {
-    const decrypted = await decrypt(encrypted, password);
-    noteTitle.value = title;
-    noteArea.value = decrypted;
-    currentNote = title;
-    statusMsg.textContent = "Decrypted!";
-  } catch {
-    statusMsg.textContent = "Wrong password!";
-  }
-}
-
-/* ENCRYPTION */
-
-async function getKey(password, salt) {
-  const enc = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    enc.encode(password),
-    { name: "PBKDF2" },
-    false,
-    ["deriveKey"]
-  );
-
-  return crypto.subtle.deriveKey(
-    {
-      name: "PBKDF2",
-      salt: salt,
-      iterations: 100000,
-      hash: "SHA-256"
-    },
-    keyMaterial,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["encrypt", "decrypt"]
-  );
+/* INITIAL LOAD */
+loadNotesList();  );
 }
 
 async function encrypt(text, password) {
