@@ -12,36 +12,37 @@
 <body>
 
 <div id="particles-js"></div>
+<div class="notes-wrapper">
 
-<nav class="navbar">
-  <a href="https://heetdevlab.github.io/">Home</a>
-  <a href="https://heetdevlab.github.io/Sentinex/">Sentinex</a>
-  <a href="index.html">WebTools</a>
-  <a href="https://youtube.com/@HeetPlaysCode">YouTube</a>
-</nav>
+  <h1 class="notes-title">🔐 Secure Notes</h1>
+  <p class="notes-sub">Encrypted locally in your browser.</p>
 
-<div class="hero">
-  <h1>📝 SECURE NOTES</h1>
-  <p>Your notes stay in your browser. No tracking.</p>
+  <div class="notes-layout">
 
-  <div class="notes-card">
-
-    <input type="password" id="notePassword" placeholder="Optional Password (lock notes)">
-    
-    <textarea id="noteArea" placeholder="Write your secure note here..."></textarea>
-
-    <div class="controls">
-      <button id="saveBtn" class="btn">Save</button>
-      <button id="loadBtn" class="btn">Load</button>
-      <button id="clearBtn" class="btn">Clear</button>
+    <!-- Sidebar -->
+    <div class="notes-sidebar">
+      <h3>Your Notes</h3>
+      <ul id="notesList"></ul>
     </div>
 
-    <p id="statusMsg"></p>
+    <!-- Editor -->
+    <div class="notes-editor">
+      <input type="text" id="noteTitle" placeholder="Note Title">
+      <input type="password" id="notePassword" placeholder="Password">
+
+      <textarea id="noteArea" placeholder="Write your secure note here..."></textarea>
+
+      <div class="controls">
+        <button id="saveBtn" class="btn">Save</button>
+        <button id="deleteBtn" class="btn">Delete</button>
+        <button id="clearBtn" class="btn">Clear</button>
+      </div>
+
+      <p id="statusMsg"></p>
+    </div>
 
   </div>
 
-  <br>
-  <a href="index.html" class="btn">← Back to Tools</a>
 </div>
 
 <script src="notes.js"></script>
