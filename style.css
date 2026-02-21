@@ -11,7 +11,7 @@ body {
   }
 
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
   }
 
   .tools-grid {
@@ -31,7 +31,7 @@ body {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #2ea8ff;
   letter-spacing: 2px;
@@ -145,24 +145,33 @@ body {
   text-align: center;
 }
 
+/* PASSWORD INPUT */
 #passwordInput {
   width: 100%;
+  max-width: 350px;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #2ea8ff;
-  background: rgba(15,25,60,0.4);
+  background: rgba(15,25,60,0.6);
   color: white;
-  margin-bottom: 15px;
+  font-size: 14px;
   outline: none;
+  margin: 15px auto;
+  display: block;
+}
+
+#passwordInput::placeholder {
+  color: #aaa;
 }
 
 .strength-bar {
   width: 100%;
+  max-width: 350px;
   height: 8px;
-  background: #222;
+  background: rgba(255,255,255,0.1);
   border-radius: 5px;
+  margin: 10px auto;
   overflow: hidden;
-  margin-bottom: 10px;
 }
 
 #strengthFill {
