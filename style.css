@@ -177,5 +177,6 @@ body {
 #strengthFill {
   height: 100%;
   width: 0%;
-  transition: 0.4s ease;
+  border-radius: 5px;
+  transition: width 0.4s ease, background 0.4s ease;
 }
