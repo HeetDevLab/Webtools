@@ -83,3 +83,22 @@ body {
   border-radius: 15px;
   font-size: 12px;
 }
+/* PARTICLES BACKGROUND */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #050816, #0a0f25);
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Make cards slightly glass */
+.tool-card {
+  background: rgba(10, 20, 60, 0.4);
+  backdrop-filter: blur(10px);
+}
