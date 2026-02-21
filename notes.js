@@ -48,9 +48,13 @@ function loadNotesList() {
         const row = document.createElement("div");
         row.className = "note-row";
 
-        const name = document.createElement("span");
+        const name = document.createElement("div");
         name.textContent = title;
         name.className = "note-name";
+
+        const controlsDiv = document.createElement("div");
+        controlsDiv.className = "note-controls";
+        controlsDiv.style.display = "none"; // hidden by default
 
         const passInput = document.createElement("input");
         passInput.type = "password";
@@ -65,7 +69,13 @@ function loadNotesList() {
         deleteBtn.textContent = "🗑";
         deleteBtn.className = "delete-btn";
 
-        // OPEN LOGIC
+        // Toggle expand/collapse
+        name.onclick = () => {
+            controlsDiv.style.display =
+                controlsDiv.style.display === "none" ? "block" : "none";
+        };
+
+        // OPEN
         openBtn.onclick = () => {
 
             const enteredPassword = passInput.value.trim();
@@ -85,7 +95,7 @@ function loadNotesList() {
             }
         };
 
-        // DELETE LOGIC
+        // DELETE WITH CONFIRM
         deleteBtn.onclick = () => {
 
             const confirmDelete = confirm("Delete this note?");
@@ -99,10 +109,12 @@ function loadNotesList() {
 
         };
 
+        controlsDiv.appendChild(passInput);
+        controlsDiv.appendChild(openBtn);
+        controlsDiv.appendChild(deleteBtn);
+
         row.appendChild(name);
-        row.appendChild(passInput);
-        row.appendChild(openBtn);
-        row.appendChild(deleteBtn);
+        row.appendChild(controlsDiv);
 
         notesList.appendChild(row);
     });
