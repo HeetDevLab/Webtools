@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Secure PIN Generator | HeetDevLab</title>
+  <title>Secure PIN Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Particles Library -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,28 +21,32 @@
 </nav>
 
 <div class="hero">
+
   <h1>🔢 SECURE PIN GENERATOR</h1>
   <p>Generate strong random PIN instantly.</p>
 
-  <div class="pin-box">
+  <div class="pin-card">
+
     <input type="text" id="pinOutput" readonly placeholder="Your PIN will appear here">
+
+    <div class="controls">
+      <select id="pinLength">
+        <option value="4">4 Digit</option>
+        <option value="6">6 Digit</option>
+        <option value="8">8 Digit</option>
+      </select>
+
+      <button onclick="generatePIN()" class="btn">Generate</button>
+      <button onclick="copyPIN()" class="btn">Copy</button>
+    </div>
+
+    <p id="copyMsg"></p>
+
   </div>
-
-  <div class="controls">
-    <select id="pinLength">
-      <option value="4">4 Digit</option>
-      <option value="6">6 Digit</option>
-      <option value="8">8 Digit</option>
-    </select>
-
-    <button onclick="generatePIN()" class="btn">Generate PIN</button>
-    <button onclick="copyPIN()" class="btn">Copy</button>
-  </div>
-
-  <p id="copyMsg"></p>
 
   <br>
   <a href="index.html" class="btn">← Back to Tools</a>
+
 </div>
 
 <script>
@@ -49,12 +57,14 @@ function generatePIN() {
     pin += Math.floor(Math.random() * 10);
   }
   document.getElementById("pinOutput").value = pin;
+  document.getElementById("copyMsg").textContent = "";
 }
 
 function copyPIN() {
   const pinField = document.getElementById("pinOutput");
-  pinField.select();
-  document.execCommand("copy");
+  if(pinField.value === "") return;
+
+  navigator.clipboard.writeText(pinField.value);
   document.getElementById("copyMsg").textContent = "PIN Copied!";
 }
 </script>
