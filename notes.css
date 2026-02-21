@@ -2,6 +2,8 @@
 body {
   margin: 0;
   padding: 0;
+  background: linear-gradient(to bottom, #0a1a3f, #020b22);
+  overflow-x: hidden;
 }
 
 /* PARTICLES */
