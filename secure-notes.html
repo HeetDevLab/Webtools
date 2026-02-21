@@ -52,6 +52,28 @@
 </div>
 <script src="notes.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="particles-config.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 70, density: { enable: true, value_area: 900 }},
+    color: { value: "#2ea8ff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3, random: true },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#2ea8ff",
+      opacity: 0.4,
+      width: 1
+    },
+    move: { enable: true, speed: 2 }
+  },
+  interactivity: {
+    events: { resize: true }
+  },
+  retina_detect: true
+});
+</script>
 </body>
 </html>
