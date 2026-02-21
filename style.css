@@ -220,3 +220,27 @@ color:#0b5cff;
   margin-top: 5px;
   color: #2ea8ff;
 }
+.pin-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2ea8ff;
+  background: rgba(15,25,60,0.5);
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+select {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+}
