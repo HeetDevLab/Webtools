@@ -59,6 +59,10 @@ function copyPIN() {
 
   navigator.clipboard.writeText(pinField.value);
   document.getElementById("copyMsg").textContent = "PIN Copied!";
+  document.getElementById("pinOutput").style.boxShadow = "0 0 20px #2ea8ff";
+setTimeout(() => {
+  document.getElementById("pinOutput").style.boxShadow = "none";
+}, 500);
 }
 </script>
 
