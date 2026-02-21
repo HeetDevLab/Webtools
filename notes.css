@@ -26,15 +26,14 @@
 /* Sidebar */
 .notes-sidebar {
   width: 250px;
-  background: rgba(15,25,60,0.25);
-  border: 1px solid rgba(46,168,255,0.2);
-  padding: 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  max-height: 450px;
+  background: rgba(20,30,70,0.35);
+  border: 1px solid rgba(46,168,255,0.15);
+  padding: 18px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  max-height: 400px;
   overflow-y: auto;
 }
-
 .notes-sidebar ul {
   list-style: none;
   padding: 0;
@@ -56,13 +55,12 @@
 /* Editor */
 .notes-editor {
   flex: 1;
-  background: rgba(15,25,60,0.25);
-  border: 1px solid rgba(46,168,255,0.2);
-  padding: 25px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
+  background: rgba(20,30,70,0.35);
+  border: 1px solid rgba(46,168,255,0.15);
+  padding: 20px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
 }
-
 .notes-editor input,
 .notes-editor textarea {
   width: 100%;
@@ -92,10 +90,23 @@
 
 /* Mobile */
 @media(max-width:768px){
+
   .notes-layout {
     flex-direction: column;
+    gap: 15px;
   }
-  .notes-sidebar {
+
+  .notes-sidebar,
+  .notes-editor {
     width: 100%;
   }
+
+  .notes-sidebar {
+    max-height: 200px;
+  }
+
+  .notes-wrapper {
+    padding: 100px 15px 40px;
+  }
+
 }
