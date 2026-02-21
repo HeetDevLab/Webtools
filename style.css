@@ -77,9 +77,13 @@ body {
   text-decoration: none;
   font-size: 14px;
   transition: 0.3s;
+  background: rgba(5, 8, 22, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 12px 0;
 }
 .navbar a:nth-child(3) {
   color: #2ea8ff;
+  font-weight: 600;
 }
 .navbar a:hover {
   color: #2ea8ff;
@@ -92,7 +96,7 @@ body {
   padding: 25px;
   border-radius: 18px;
   backdrop-filter: blur(12px);
-  transition: 0.3s ease;
+  transition: all 0.35s ease;
 }
 .tool-card:hover {
   transform: translateY(-6px);
