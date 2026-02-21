@@ -4,10 +4,11 @@
   <title>Secure PIN Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Particles Library -->
+  <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pin.css">
 </head>
 <body>
 
@@ -29,11 +30,9 @@
         <option value="8">8 Digit</option>
       </select>
 
-      <button onclick="generatePIN()" class="btn">Generate</button>
-      <button onclick="copyPIN()" class="btn">Copy</button>
+      <button id="generateBtn" class="btn">Generate</button>
+      <button id="copyBtn" class="btn">Copy</button>
     </div>
-
-    <p id="copyMsg"></p>
 
   </div>
 
@@ -42,30 +41,7 @@
 
 </div>
 
-<script>
-function generatePIN() {
-  const length = document.getElementById("pinLength").value;
-  let pin = "";
-  for (let i = 0; i < length; i++) {
-    pin += Math.floor(Math.random() * 10);
-  }
-  document.getElementById("pinOutput").value = pin;
-  document.getElementById("copyMsg").textContent = "";
-}
-
-function copyPIN() {
-  const pinField = document.getElementById("pinOutput");
-  if(pinField.value === "") return;
-
-  navigator.clipboard.writeText(pinField.value);
-  document.getElementById("copyMsg").textContent = "PIN Copied!";
-  document.getElementById("pinOutput").style.boxShadow = "0 0 20px #2ea8ff";
-setTimeout(() => {
-  document.getElementById("pinOutput").style.boxShadow = "none";
-}, 500);
-}
-</script>
-
+<script src="pin.js"></script>
 <script src="particles-config.js"></script>
 
 </body>
