@@ -1,18 +1,18 @@
 particlesJS("particles-js", {
   particles: {
-    number: { value: 70 },
-    size: { value: 2.5 },
-    color: { value: "#1fa2ff" },
+    number: { value: 55 },
+    size: { value: 2 },
+    color: { value: "#2ea8ff" },
     line_linked: {
       enable: true,
-      distance: 140,
-      color: "#1fa2ff",
-      opacity: 0.3,
+      distance: 130,
+      color: "#2ea8ff",
+      opacity: 0.2,
       width: 1
     },
     move: {
       enable: true,
-      speed: 1.5
+      speed: 1.2
     }
   },
   interactivity: {
