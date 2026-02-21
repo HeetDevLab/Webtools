@@ -41,20 +41,37 @@ saveBtn.addEventListener("click", () => {
 function loadNotesList() {
 
     notesList.innerHTML = "";
-
     let notes = JSON.parse(localStorage.getItem("secureNotes")) || {};
 
     Object.keys(notes).forEach(title => {
 
-        const li = document.createElement("li");
-        li.textContent = title;
+        const row = document.createElement("div");
+        row.className = "note-row";
 
-        li.onclick = () => {
+        const name = document.createElement("span");
+        name.textContent = title;
+        name.className = "note-name";
 
-            const enteredPassword = notePassword.value.trim();
+        const passInput = document.createElement("input");
+        passInput.type = "password";
+        passInput.placeholder = "Password";
+        passInput.className = "mini-pass";
+
+        const openBtn = document.createElement("button");
+        openBtn.textContent = "Open";
+        openBtn.className = "mini-btn";
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "🗑";
+        deleteBtn.className = "delete-btn";
+
+        // OPEN LOGIC
+        openBtn.onclick = () => {
+
+            const enteredPassword = passInput.value.trim();
 
             if (!enteredPassword) {
-                statusMsg.textContent = "Enter password first";
+                statusMsg.textContent = "Enter password";
                 return;
             }
 
@@ -62,14 +79,32 @@ function loadNotesList() {
                 noteTitle.value = title;
                 noteArea.value = notes[title].text;
                 currentNote = title;
-                statusMsg.textContent = "Loaded";
+                statusMsg.textContent = "Note Opened";
             } else {
                 statusMsg.textContent = "Wrong password";
+            }
+        };
+
+        // DELETE LOGIC
+        deleteBtn.onclick = () => {
+
+            const confirmDelete = confirm("Delete this note?");
+
+            if (confirmDelete) {
+                delete notes[title];
+                localStorage.setItem("secureNotes", JSON.stringify(notes));
+                loadNotesList();
+                statusMsg.textContent = "Deleted";
             }
 
         };
 
-        notesList.appendChild(li);
+        row.appendChild(name);
+        row.appendChild(passInput);
+        row.appendChild(openBtn);
+        row.appendChild(deleteBtn);
+
+        notesList.appendChild(row);
     });
 }
 
