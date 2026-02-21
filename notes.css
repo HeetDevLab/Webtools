@@ -1,210 +1,219 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-/* ===== Wrapper ===== */
-.notes-wrapper {
-  padding: 85px 16px 60px;
-  max-width: 700px;   /* pehle 1100 tha — phone ke liye zyada tha */
-  margin: 0 auto;     /* center align */
+/* ===============================
+   GLOBAL FIX
+================================= */
+body{
+  margin:0;
+  padding:0;
 }
 
-/* ===== Title ===== */
-.notes-title {
-  text-align: center;
-  font-size: 2rem;
-  color: #2ea8ff;
-  text-shadow: 0 0 15px rgba(46,168,255,0.7);
+/* ===============================
+   WRAPPER
+================================= */
+.notes-wrapper{
+  padding:90px 16px 60px;
+  max-width:750px;
+  margin:0 auto;
+  position:relative;
+  z-index:2;
 }
 
-.notes-sub {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #ccc;
+/* ===============================
+   TITLE
+================================= */
+.notes-title{
+  text-align:center;
+  font-size:2rem;
+  color:#2ea8ff;
+  text-shadow:0 0 15px rgba(46,168,255,0.7);
 }
 
-/* ===== Layout ===== */
-.notes-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* center horizontally */
+.notes-sub{
+  text-align:center;
+  margin-bottom:30px;
+  color:#ccc;
 }
 
-/* ===== Sidebar ===== */
-.notes-sidebar {
-  width: 260px;
-  background: rgba(20,30,70,0.35);
-  border: 1px solid rgba(46,168,255,0.15);
-  padding: 18px;
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
-  max-height: 420px;
-  overflow-y: auto;
+/* ===============================
+   LAYOUT
+================================= */
+.notes-layout{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  align-items:center;
 }
 
-.notes-sidebar h3 {
-  margin-bottom: 15px;
-  color: #2ea8ff;
+/* ===============================
+   SIDEBAR (Saved Notes Box)
+================================= */
+.notes-sidebar{
+  width:100%;
+  background:rgba(20,30,70,0.35);
+  border:1px solid rgba(46,168,255,0.15);
+  padding:20px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
 }
 
-.notes-sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.notes-sidebar h3{
+  margin-bottom:15px;
+  color:#2ea8ff;
 }
 
-.notes-sidebar li {
-  padding: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  background: rgba(46,168,255,0.1);
-  transition: 0.2s ease;
+.notes-sidebar ul{
+  list-style:none;
+  padding:0;
+  margin:0;
 }
 
-.notes-sidebar li:hover {
-  background: rgba(46,168,255,0.3);
+/* Each Note Row */
+.note-row{
+  margin-bottom:15px;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(46,168,255,0.08);
+  transition:0.3s ease;
 }
 
-/* ===== Editor ===== */
-.notes-editor {
-  flex: 1;
-  background: rgba(20,30,70,0.35);
-  border: 1px solid rgba(46,168,255,0.15);
-  padding: 25px;
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
+.note-row:hover{
+  background:rgba(46,168,255,0.18);
 }
 
-/* ===== Inputs ===== */
+.note-name{
+  font-weight:bold;
+  color:#2ea8ff;
+  cursor:pointer;
+}
+
+/* Hidden by default (show on click via JS) */
+.note-actions{
+  display:none;
+  margin-top:10px;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* ===============================
+   MINI INPUT + BUTTONS
+================================= */
+.mini-pass{
+  padding:8px;
+  border-radius:10px;
+  border:1px solid #2ea8ff;
+  background:rgba(15,25,60,0.6);
+  color:white;
+}
+
+.mini-btn{
+  padding:8px;
+  border-radius:10px;
+  border:none;
+  background:#2ea8ff;
+  color:black;
+  cursor:pointer;
+  font-weight:500;
+}
+
+.delete-btn{
+  padding:8px;
+  border-radius:10px;
+  border:none;
+  background:#ff4444;
+  color:white;
+  cursor:pointer;
+}
+
+/* ===============================
+   EDITOR
+================================= */
+.notes-editor{
+  width:100%;
+  background:rgba(20,30,70,0.35);
+  border:1px solid rgba(46,168,255,0.15);
+  padding:25px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+}
+
+/* ===============================
+   INPUTS
+================================= */
 .notes-editor input,
-.notes-editor textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #2ea8ff;
-  background: rgba(15,25,60,0.6);
-  color: white;
-  margin-bottom: 15px;
-  font-size: 14px;
+.notes-editor textarea{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #2ea8ff;
+  background:rgba(15,25,60,0.6);
+  color:white;
+  margin-bottom:18px;
+  font-size:14px;
+  box-sizing:border-box;
 }
 
-.notes-editor textarea {
-  min-height: 160px;
-  resize: none;
+.notes-editor textarea{
+  min-height:170px;
+  resize:none;
 }
 
 .notes-editor input::placeholder,
-.notes-editor textarea::placeholder {
-  color: rgba(255,255,255,0.5);
+.notes-editor textarea::placeholder{
+  color:rgba(255,255,255,0.5);
 }
 
-/* ===== Buttons ===== */
-.controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+/* ===============================
+   BUTTONS
+================================= */
+.controls{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 
-.controls .btn {
-  transition: 0.3s ease;
+.controls .btn{
+  transition:0.3s ease;
 }
 
-.controls .btn:hover {
-  transform: translateY(-2px);
+.controls .btn:hover{
+  transform:translateY(-3px);
 }
 
-/* ===== Status Message ===== */
-#statusMsg {
-  margin-top: 10px;
-  color: #00ff88;
-  font-size: 14px;
+/* ===============================
+   STATUS MESSAGE
+================================= */
+#statusMsg{
+  margin-top:12px;
+  color:#00ff88;
+  font-size:14px;
+  text-align:center;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
+/* ===============================
+   MOBILE OPTIMIZATION
+================================= */
 @media(max-width:768px){
 
-  .notes-wrapper {
-    padding: 100px 15px 40px;
+  .notes-wrapper{
+    padding:80px 14px 50px;
   }
 
-  .notes-layout {
-    flex-direction: column;
-    gap: 20px;
+  .notes-title{
+    font-size:1.7rem;
   }
 
-.notes-sidebar,
-.notes-editor {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-  .notes-sidebar {
-    max-height: 200px;
+  .notes-editor textarea{
+    min-height:160px;
   }
 
-  .notes-editor textarea {
-    min-height: 180px;
-  }
-
-  .controls {
-    justify-content: center;
+  .controls{
+    justify-content:center;
   }
 
 }
-#statusMsg {
-  margin-top: 10px;
-  color: #00ff88;
+#particles-js{
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:0;
 }
-.note-row {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 15px;
-  padding: 10px;
-  background: rgba(46,168,255,0.08);
-  border-radius: 10px;
-}
-
-.note-name {
-  font-weight: bold;
-  color: #2ea8ff;
-}
-.note-controls {
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
-}
-.mini-pass {
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid #2ea8ff;
-  background: rgba(15,25,60,0.6);
-  color: white;
-}
-
-.mini-btn {
-  padding: 6px;
-  border-radius: 8px;
-  border: none;
-  background: #2ea8ff;
-  color: black;
-  cursor: pointer;
-}
-
-.delete-btn {
-  padding: 6px;
-  border-radius: 8px;
-  border: none;
-  background: #ff4444;
-  color: white;
-  cursor: pointer;
-}
-/* Mobile */
