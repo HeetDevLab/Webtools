@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secure PIN Generator | HeetDevLab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav class="navbar">
+  <a href="https://heetdevlab.github.io/">Home</a>
+  <a href="https://heetdevlab.github.io/Sentinex/">Sentinex</a>
+  <a href="https://heetdevlab.github.io/Webtools/">WebTools</a>
+  <a href="https://youtube.com/@HeetPlaysCode">YouTube</a>
+</nav>
+
+<div class="hero">
+  <h1>🔢 SECURE PIN GENERATOR</h1>
+  <p>Generate strong random PIN instantly.</p>
+
+  <div class="pin-box">
+    <input type="text" id="pinOutput" readonly placeholder="Your PIN will appear here">
+  </div>
+
+  <div class="controls">
+    <select id="pinLength">
+      <option value="4">4 Digit</option>
+      <option value="6">6 Digit</option>
+      <option value="8">8 Digit</option>
+    </select>
+
+    <button onclick="generatePIN()" class="btn">Generate PIN</button>
+    <button onclick="copyPIN()" class="btn">Copy</button>
+  </div>
+
+  <p id="copyMsg"></p>
+
+  <br>
+  <a href="index.html" class="btn">← Back to Tools</a>
+</div>
+
+<script>
+function generatePIN() {
+  const length = document.getElementById("pinLength").value;
+  let pin = "";
+  for (let i = 0; i < length; i++) {
+    pin += Math.floor(Math.random() * 10);
+  }
+  document.getElementById("pinOutput").value = pin;
+}
+
+function copyPIN() {
+  const pinField = document.getElementById("pinOutput");
+  pinField.select();
+  document.execCommand("copy");
+  document.getElementById("copyMsg").textContent = "PIN Copied!";
+}
+</script>
+
+<script src="particles-config.js"></script>
+
+</body>
+</html>
