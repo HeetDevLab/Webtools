@@ -4,18 +4,22 @@
   <title>Secure Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="notes.css">
 </head>
 <body>
 
 <div id="particles-js"></div>
+
+<nav class="navbar">
+  <a href="https://heetdevlab.github.io/">Home</a>
+  <a href="index.html">WebTools</a>
+</nav>
+
 <div class="notes-wrapper">
 
   <h1 class="notes-title">🔐 Secure Notes</h1>
-  <p class="notes-sub">Encrypted locally in your browser.</p>
+  <p class="notes-sub">Saved locally in your browser.</p>
 
   <div class="notes-layout">
 
@@ -27,6 +31,7 @@
 
     <!-- Editor -->
     <div class="notes-editor">
+
       <input type="text" id="noteTitle" placeholder="Note Title">
       <input type="password" id="notePassword" placeholder="Password">
 
@@ -39,6 +44,7 @@
       </div>
 
       <p id="statusMsg"></p>
+
     </div>
 
   </div>
@@ -46,7 +52,6 @@
 </div>
 
 <script src="notes.js"></script>
-<script src="particles-config.js"></script>
 
 </body>
 </html>
