@@ -4,6 +4,26 @@ body {
   background: linear-gradient(135deg, #050816, #0a0f25);
   color: white;
 }
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 80px 5%;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .tools-grid {
+    padding: 40px 5%;
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 20px;
+  }
+
+}
 
 /* HERO */
 .hero {
@@ -121,23 +141,3 @@ body {
   z-index: 1;
 }
 
-@media (max-width: 768px) {
-
-  .hero {
-    padding: 80px 5%;
-  }
-
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .tools-grid {
-    padding: 40px 5%;
-    grid-template-columns: 1fr;
-  }
-
-  .tool-card {
-    padding: 20px;
-  }
-
-}
