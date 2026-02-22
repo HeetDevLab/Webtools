@@ -1,55 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web Tools | HeetDevLab</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeetDevLab WebTools</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
-  <div id="particles-js"></div>
-  <nav class="navbar">
-  <a href="https://heetdevlab.github.io/">Home</a>
-  <a href="https://heetdevlab.github.io/Sentinex/">Sentinex</a>
-    <a href="https://heetdevlab.github.io/Webtools/">
-  WebTools <span style="color:#00ff88;font-size:10px;">NEW</span>
-    </a>
-  <a href="https://youtube.com/@HeetPlaysCode">YouTube</a>
-</nav>
+
 <body>
-<div class="content">
-   <!-- Hero + Tools Grid yaha rahega -->
-<section class="hero">
-  <h1>🔧 HeetDevLab Web Tools</h1>
-  <p>Privacy-Focused Cyber Utilities</p>
+
+<nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/Sentinex/">Sentinex</a>
+    <a class="active" href="/Webtools/">WebTools</a>
+    <a href="#">YouTube</a>
+</nav>
+
+<header class="hero">
+    <h1>HEETDEVLAB WEB TOOLS</h1>
+    <p>Privacy-Focused Cyber Utilities</p>
+</header>
+
+<!-- ================= PASSWORD SECTION ================= -->
+
+<section class="tool-section">
+    <h2>🔐 Password & Authentication Tools</h2>
+
+    <div class="tool-grid">
+
+        <div class="tool-card">
+            <h3>🔒 Password Strength Checker</h3>
+            <p>Check your password security instantly.</p>
+            <a href="tools/password-checker.html" class="btn">Launch Tool →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>🔢 Secure PIN Generator</h3>
+            <p>Generate strong secure PIN instantly.</p>
+            <a href="tools/pin-generator.html" class="btn">Launch Tool →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>🧠 Advanced Password Generator</h3>
+            <p>Customizable secure password builder.</p>
+            <a href="tools/password-generator.html" class="btn">Launch Tool →</a>
+        </div>
+
+    </div>
 </section>
 
-<section class="tools-grid">
 
-  <div class="tool-card">
-    <h3>🔐 Password Strength Checker</h3>
-    <p>Check your password security instantly.</p>
-    <a href="password-checker.html" class="btn">Launch Tool →</a>
-  </div>
+<!-- ================= ENCRYPTION SECTION ================= -->
 
-  <div class="tool-card">
-    <h3>🔢 Secure PIN Generator</h3>
-    <p>Generate strong secure PIN.</p>
-    <a href="pin-generator.html" class="btn">Launch Tool →</a>
-  </div>
+<section class="tool-section">
+    <h2>🔑 Encryption & Encoding Tools</h2>
 
-  <div class="tool-card">
-    <h3>📝 Secure Notes</h3>
-    <p>Store notes safely in your browser.</p>
-    <a href="secure-notes.html" class="btn">Launch Tool →</a>
-  </div>
+    <div class="tool-grid">
 
+        <div class="tool-card">
+            <h3>📝 Secure Notes</h3>
+            <p>Store notes safely in your browser.</p>
+            <a href="tools/secure-notes.html" class="btn">Launch Tool →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>🔐 Hash Generator</h3>
+            <p>Generate SHA-256 hash instantly.</p>
+            <a href="tools/hash-generator.html" class="btn">Launch Tool →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>🔏 Encrypt / Decrypt</h3>
+            <p>Encrypt and decrypt text securely.</p>
+            <a href="tools/encrypt-decrypt.html" class="btn">Launch Tool →</a>
+        </div>
+
+        <div class="tool-card">
+            <h3>📦 Base64 Encoder / Decoder</h3>
+            <p>Encode and decode Base64 data.</p>
+            <a href="tools/base64.html" class="btn">Launch Tool →</a>
+        </div>
+
+    </div>
 </section>
-</div>
-<footer style="text-align:center; padding:40px 20px; font-size:0.8rem; color:#888;">
-  © 2026 HeetDevLab • Privacy First • Indie Built
+
+
+<!-- ================= FUTURE NETWORK SECTION ================= -->
+
+<section class="tool-section">
+    <h2>🌐 Network & Analysis Tools (Coming Soon)</h2>
+
+    <div class="tool-grid">
+
+        <div class="tool-card disabled">
+            <h3>🌍 IP Address Viewer</h3>
+            <p>View public IP details.</p>
+            <span class="coming">Coming Soon</span>
+        </div>
+
+        <div class="tool-card disabled">
+            <h3>🔎 SSL Certificate Checker</h3>
+            <p>Check SSL security status.</p>
+            <span class="coming">Coming Soon</span>
+        </div>
+
+    </div>
+</section>
+
+
+<footer>
+    <p>© 2026 HeetDevLab • Privacy First • Indie Built</p>
 </footer>
-  <script src="particles-config.js"></script>
-  
+
 </body>
 </html>
