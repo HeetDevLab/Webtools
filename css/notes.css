@@ -195,9 +195,6 @@ body {
 }
 
 /* Reset global button force */
-.checker-box .btn {
-    width: auto;
-}
 
 /* Primary Generate Button */
 .primary-btn {
