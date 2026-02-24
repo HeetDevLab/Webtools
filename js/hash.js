@@ -1,7 +1,11 @@
-// ===== GENERATE SHA-256 HASH =====
+// ===============================
+// HASH GENERATOR - HeetDevLab
+// ===============================
+
+// ===== GENERATE HASH =====
 async function generateHash() {
-    
-    const text = document.getElementById("textInput").value;
+
+    const text = document.getElementById("inputText").value;
     const type = document.getElementById("hashType").value;
     const output = document.getElementById("hashOutput");
 
@@ -10,12 +14,15 @@ async function generateHash() {
         return;
     }
 
+    // MD5 (uses CryptoJS)
     if (type === "MD5") {
-        output.value = md5(text);
-        updateLength(output.value.length);
+        const hash = CryptoJS.MD5(text).toString();
+        output.value = hash;
+        updateLength(hash.length);
         return;
     }
 
+    // SHA algorithms (native browser crypto)
     const encoder = new TextEncoder();
     const data = encoder.encode(text);
 
@@ -29,29 +36,38 @@ async function generateHash() {
     output.value = hashHex;
     updateLength(hashHex.length);
 }
+
+
+// ===== UPDATE LENGTH =====
 function updateLength(length) {
-    document.getElementById("lengthDisplay").textContent =
-        "Length: " + length;
+    const lengthText = document.getElementById("lengthDisplay");
+    if (lengthText) {
+        lengthText.textContent = "Length: " + length;
+    }
 }
 
-function md5(str) {
-    return CryptoJS.MD5(str).toString();
-}
-// ===== COPY =====
+
+// ===== COPY HASH =====
 function copyHash() {
 
     const output = document.getElementById("hashOutput");
 
     if (!output.value) return;
 
-    navigator.clipboard.writeText(output.value);
+    navigator.clipboard.writeText(output.value).then(() => {
+        alert("Hash copied!");
+    });
 }
 
 
-// ===== CLEAR =====
+// ===== CLEAR ALL =====
 function clearAll() {
 
     document.getElementById("inputText").value = "";
     document.getElementById("hashOutput").value = "";
-    document.getElementById("lengthText").textContent = "Length: -";
+
+    const lengthText = document.getElementById("lengthDisplay");
+    if (lengthText) {
+        lengthText.textContent = "Length: -";
+    }
 }
