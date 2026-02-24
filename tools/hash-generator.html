@@ -24,7 +24,13 @@
 <section class="checker-box">
 
 <textarea id="inputText" text-color="white" placeholder="Enter text here..."></textarea>
-
+<label for="hashType">Select Algorithm</label>
+<select id="hashType" class="hash-select">
+  <option value="SHA-256">SHA-256 (Recommended)</option>
+  <option value="SHA-512">SHA-512</option>
+  <option value="SHA-1">SHA-1</option>
+  <option value="MD5">MD5 (Not Secure)</option>
+</select>
 <button class="btn primary-btn" onclick="generateHash()">
 Generate Hash
 </button>
