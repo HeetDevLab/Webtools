@@ -2,13 +2,6 @@
    HASH GENERATOR - FINAL POLISH
    HeetDevLab Secure Tools
    =============================== */
-
-.content {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
-
 /* HERO */
 .hero {
     text-align: center;
@@ -31,30 +24,37 @@
 }
 
 /* MAIN CARD */
-.checker-box {
-    background: linear-gradient(145deg, rgba(8,24,38,0.85), rgba(4,18,32,0.85));
-    backdrop-filter: blur(14px);
-    padding: 40px;
-    border-radius: 30px;
-    border: 1px solid rgba(0,245,255,0.25);
-    box-shadow:
-        0 0 40px rgba(0,245,255,0.15),
-        inset 0 0 20px rgba(0,245,255,0.05);
+/* ===== FIX WIDTH ISSUE ===== */
+
+.content {
+    width: 100%;
+    padding: 30px 15px;
 }
 
-/* TEXTAREA */
+.checker-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 25px 20px;
+    border-radius: 22px;
+    box-sizing: border-box;
+}
+
+/* Remove inner fake double effect */
 textarea {
     width: 100%;
-    min-height: 170px;
-    padding: 18px;
-    border-radius: 22px;
-    background: rgba(5,20,35,0.95);
-    border: 1px solid rgba(0,245,255,0.4);
-    color: #00f5ff;
-    font-size: 1rem;
-    resize: none;
-    transition: 0.3s ease;
-    margin-bottom: 30px;
+    min-height: 160px;
+    padding: 16px;
+    border-radius: 18px;
+    background: #061826;
+    border: 1px solid rgba(0,245,255,0.5);
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+/* Output box full width */
+#hashOutput {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 textarea:focus {
