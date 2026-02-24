@@ -150,3 +150,18 @@ a.btn {
         width: 100%;
     }
 }
+.hash-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 15px;
+    background: #061826;
+    border: 1px solid #00f5ff;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.hash-select:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0,245,255,0.5);
+}
