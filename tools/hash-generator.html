@@ -3,45 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hash Generator | HeetDevLab</title>
+<title>Universal Hash Tool | HeetDevLab</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/hash-generator.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="../css/hash-generator.css">
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 
 <body>
 
-<div id="particles-js"></div>
 <div class="content">
 
 <section class="hero">
-<h1>🔐 Hash Generator</h1>
-<p>Generate SHA-256 hash instantly.</p>
+<h1>🔐 Universal Hash Tool</h1>
+<p>Generate hash from text or file securely.</p>
 </section>
 
 <section class="checker-box">
 
-<textarea id="inputText" text-color="white" placeholder="Enter text here..."></textarea>
-<label for="hashType">Select Algorithm</label>
+<!-- MODE SWITCH -->
+<div class="mode-switch">
+<button class="mode-btn active" onclick="switchMode('text')">Text</button>
+<button class="mode-btn" onclick="switchMode('file')">File</button>
+</div>
+
+<!-- ALGORITHM -->
 <select id="hashType" class="hash-select">
-  <option value="SHA-256">SHA-256 (Recommended)</option>
+  <option value="SHA-256">SHA-256</option>
   <option value="SHA-512">SHA-512</option>
   <option value="SHA-1">SHA-1</option>
-  <option value="MD5">MD5 (Not Secure)</option>
+  <option value="MD5">MD5</option>
 </select>
-<button class="btn primary-btn" onclick="generateHash()">
+
+<!-- TEXT MODE -->
+<div id="textSection">
+
+<textarea id="inputText" placeholder="Enter text here..."></textarea>
+
+<button class="btn primary-btn" onclick="generateTextHash()">
 Generate Hash
 </button>
 
+</div>
+
+<!-- FILE MODE -->
+<div id="fileSection" style="display:none;">
+
+<input type="file" id="fileInput" class="hash-select">
+
+<button class="btn primary-btn" onclick="generateFileHash()">
+Generate File Hash
+</button>
+
+</div>
+
+<!-- OUTPUT -->
 <div class="result-box">
 <input type="text" id="hashOutput" readonly>
 <button class="btn small-btn" onclick="copyHash()">Copy</button>
 </div>
 
 <div class="metrics">
-  <span id="lengthDisplay">Length: -</span>
+<span id="infoText">Length: -</span>
 </div>
 
 <button class="btn" onclick="clearAll()">Clear</button>
@@ -49,16 +73,12 @@ Generate Hash
 </section>
 
 <div style="text-align:center; margin-top:30px;">
-<a href="../index.html" class="back-btn">← Back to Tools</a>
+<a href="../index.html" class="btn">← Back to Tools</a>
 </div>
 
 </div>
-  <footer class="main-footer">
-  <p>© 2026 HeetDevLab</p>
-  <p class="footer-sub">Privacy First • Indie Built • Secure Tools</p>
-  </footer>
-<script src="../particles-config.js"></script>
-<script src="../js/hash.js"></script>
+
+<script src="../js/hash-tool.js"></script>
 
 </body>
 </html>
