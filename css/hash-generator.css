@@ -165,3 +165,25 @@ a.btn {
     outline: none;
     box-shadow: 0 0 15px rgba(0,245,255,0.5);
 }
+/* MODE SWITCH */
+.mode-switch {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #00f5ff;
+    background: transparent;
+    color: #00f5ff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.mode-btn.active {
+    background: #00f5ff;
+    color: #000;
+}
