@@ -1,3 +1,78 @@
+/* ===== Layout Fix ===== */
+
+.content {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #aaa;
+}
+
+/* Textarea */
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border-radius: 14px;
+    background: #081826;
+    border: 1px solid #00f5ff;
+    color: #00f5ff;
+    font-size: 1rem;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+/* Button Center */
+.primary-btn {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 12px 30px;
+    border-radius: 30px;
+}
+
+/* Result Box */
+.result-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    align-items: center;
+}
+
+#hashOutput {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    background: #081826;
+    border: 1px solid #00f5ff;
+    color: #00f5ff;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+/* Metrics */
+.metrics {
+    text-align: center;
+    margin: 20px 0;
+    color: #aaa;
+}
+
+/* Clear Button */
+.btn {
+    display: block;
+    margin: 10px auto;
+}
 textarea {
     width: 100%;
     min-height: 120px;
@@ -28,4 +103,17 @@ textarea {
 .metrics {
     margin-top: 15px;
     color: #aaa;
+}
+/* ===== Footer ===== */
+
+.main-footer {
+    text-align: center;
+    padding: 60px 20px 40px;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.footer-sub {
+    margin-top: 8px;
+    color: #666;
 }
