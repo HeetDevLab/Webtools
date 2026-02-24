@@ -3,20 +3,7 @@
    HeetDevLab Secure Tools
    =============================== */
 /* HERO */
-.hero {
-    text-align: center;
-    margin-bottom: 45px;
-}
 
-.hero h1 {
-    font-size: 2.3rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg,#00f5ff,#00b3ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(0,245,255,0.6);
-}
 
 .hero p {
     margin-top: 12px;
