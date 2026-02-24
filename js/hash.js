@@ -1,8 +1,7 @@
 // ===============================
-// HASH GENERATOR - HeetDevLab
+// UNIVERSAL HASH GENERATOR
 // ===============================
 
-// ===== GENERATE HASH =====
 async function generateHash() {
 
     const text = document.getElementById("inputText").value;
@@ -14,7 +13,7 @@ async function generateHash() {
         return;
     }
 
-    // MD5 (uses CryptoJS)
+    // ===== MD5 (CryptoJS) =====
     if (type === "MD5") {
         const hash = CryptoJS.MD5(text).toString();
         output.value = hash;
@@ -22,52 +21,47 @@ async function generateHash() {
         return;
     }
 
-    // SHA algorithms (native browser crypto)
-    const encoder = new TextEncoder();
-    const data = encoder.encode(text);
+    // ===== SHA via CryptoJS (more reliable) =====
+    let hash;
 
-    const hashBuffer = await crypto.subtle.digest(type, data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    if (type === "SHA-256") {
+        hash = CryptoJS.SHA256(text).toString();
+    }
+    else if (type === "SHA-512") {
+        hash = CryptoJS.SHA512(text).toString();
+    }
+    else if (type === "SHA-1") {
+        hash = CryptoJS.SHA1(text).toString();
+    }
 
-    const hashHex = hashArray
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-
-    output.value = hashHex;
-    updateLength(hashHex.length);
+    output.value = hash;
+    updateLength(hash.length);
 }
 
 
 // ===== UPDATE LENGTH =====
 function updateLength(length) {
-    const lengthText = document.getElementById("lengthDisplay");
-    if (lengthText) {
-        lengthText.textContent = "Length: " + length;
-    }
+    document.getElementById("lengthDisplay").textContent =
+        "Length: " + length;
 }
 
 
-// ===== COPY HASH =====
+// ===== COPY =====
 function copyHash() {
 
     const output = document.getElementById("hashOutput");
 
     if (!output.value) return;
 
-    navigator.clipboard.writeText(output.value).then(() => {
-        alert("Hash copied!");
-    });
+    navigator.clipboard.writeText(output.value)
+        .then(() => alert("Hash copied!"));
 }
 
 
-// ===== CLEAR ALL =====
+// ===== CLEAR =====
 function clearAll() {
 
     document.getElementById("inputText").value = "";
     document.getElementById("hashOutput").value = "";
-
-    const lengthText = document.getElementById("lengthDisplay");
-    if (lengthText) {
-        lengthText.textContent = "Length: -";
-    }
+    document.getElementById("lengthDisplay").textContent = "Length: -";
 }
