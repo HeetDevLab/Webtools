@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Generator | HeetDevLab</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/hash-generator.css">
+</head>
+
+<body>
+
+<div class="content">
+
+<section class="hero">
+<h1>🔐 Hash Generator</h1>
+<p>Generate SHA-256 hash instantly.</p>
+</section>
+
+<section class="checker-box">
+
+<textarea id="inputText" placeholder="Enter text here..."></textarea>
+
+<button class="btn primary-btn" onclick="generateHash()">
+Generate Hash
+</button>
+
+<div class="result-box">
+<input type="text" id="hashOutput" readonly>
+<button class="btn small-btn" onclick="copyHash()">Copy</button>
+</div>
+
+<div class="metrics">
+<span id="lengthText">Length: -</span>
+</div>
+
+<button class="btn" onclick="clearAll()">Clear</button>
+
+</section>
+
+<div style="text-align:center; margin-top:30px;">
+<a href="../index.html" class="back-btn">← Back to Tools</a>
+</div>
+
+</div>
+
+<script src="../js/hash.js"></script>
+
+</body>
+</html>
