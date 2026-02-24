@@ -188,3 +188,75 @@ body {
   }
 
 }
+/* ===== LAYOUT FIX v2 ===== */
+
+.action-area {
+    margin-top: 20px;
+}
+
+/* Reset global button force */
+.checker-box .btn {
+    width: auto;
+}
+
+/* Primary Generate Button */
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 20px;
+}
+
+/* Result Section */
+.result-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.result-box input {
+    flex: 1;
+}
+
+/* Small Copy Button */
+.small-btn {
+    padding: 8px 16px;
+    border-radius: 16px;
+}
+
+/* Metrics row */
+.metrics {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+/* Download button full width */
+.checker-box > .btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+
+    .options {
+        grid-template-columns: 1fr;
+    }
+
+    .result-box {
+        flex-direction: column;
+    }
+
+    .small-btn {
+        width: 100%;
+    }
+
+    .metrics {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+    }
+}
