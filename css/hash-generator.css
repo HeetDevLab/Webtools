@@ -24,7 +24,17 @@
     border-radius: 22px;
     box-sizing: border-box;
 }
+/* ===== FIX TEXT COLOR ISSUE ===== */
 
+textarea,
+#hashOutput {
+    color: #ffffff !important;
+    caret-color: #00f5ff;
+}
+
+textarea::placeholder {
+    color: rgba(255,255,255,0.5);
+}
 /* Remove inner fake double effect */
 textarea {
     width: 100%;
