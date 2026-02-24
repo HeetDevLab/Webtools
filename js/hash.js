@@ -1,28 +1,42 @@
 // ===== GENERATE SHA-256 HASH =====
 async function generateHash() {
+    
+    const text = document.getElementById("textInput").value;
+    const type = document.getElementById("hashType").value;
+    const output = document.getElementById("hashOutput");
 
-    const input = document.getElementById("inputText").value;
+    if (!text) {
+        alert("Enter some text first!");
+        return;
+    }
 
-    if (!input) return;
+    if (type === "MD5") {
+        output.value = md5(text);
+        updateLength(output.value.length);
+        return;
+    }
 
     const encoder = new TextEncoder();
-    const data = encoder.encode(input);
+    const data = encoder.encode(text);
 
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-
+    const hashBuffer = await crypto.subtle.digest(type, data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
 
     const hashHex = hashArray
         .map(b => b.toString(16).padStart(2, "0"))
         .join("");
 
-    document.getElementById("hashOutput").value = hashHex;
-
-    document.getElementById("lengthText").textContent =
-        "Length: " + hashHex.length + " characters";
+    output.value = hashHex;
+    updateLength(hashHex.length);
+}
+function updateLength(length) {
+    document.getElementById("lengthDisplay").textContent =
+        "Length: " + length;
 }
 
-
+function md5(str) {
+    return CryptoJS.MD5(str).toString();
+}
 // ===== COPY =====
 function copyHash() {
 
