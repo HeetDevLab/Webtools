@@ -1,3 +1,6 @@
+let countdownInterval = null;
+
+// Base64URL decode
 function base64UrlDecode(str) {
     str = str.replace(/-/g, '+').replace(/_/g, '/');
     const pad = str.length % 4;
@@ -11,7 +14,7 @@ function decodeJWT() {
     const status = document.getElementById("jwtStatus");
 
     if (!input) {
-        status.textContent = "Status: Enter token first";
+        status.textContent = "Enter token first";
         status.style.color = "#ff4d4d";
         return;
     }
@@ -35,7 +38,8 @@ function decodeJWT() {
         document.getElementById("payloadOutput").value =
             JSON.stringify(payload, null, 2);
 
-        checkExpiry(payload);
+        showAlgorithm(header);
+        handleExpiry(payload);
 
         status.textContent = "Token Decoded Successfully";
         status.style.color = "#00ff88";
@@ -46,35 +50,77 @@ function decodeJWT() {
     }
 }
 
-function checkExpiry(payload) {
+function showAlgorithm(header) {
+    const expiryInfo = document.getElementById("expiryInfo");
+    expiryInfo.textContent = "Algorithm: " + (header.alg || "Unknown");
+}
+
+function handleExpiry(payload) {
 
     const expiryInfo = document.getElementById("expiryInfo");
 
+    clearInterval(countdownInterval);
+
     if (!payload.exp) {
-        expiryInfo.textContent = "Expiry: Not Found";
+        expiryInfo.textContent += " | Expiry: Not Found";
         return;
     }
 
-    const expDate = new Date(payload.exp * 1000);
-    const now = new Date();
+    const expTime = payload.exp * 1000;
+    const expDate = new Date(expTime);
 
-    if (expDate < now) {
-        expiryInfo.textContent = "Expired: " + expDate.toLocaleString();
-        expiryInfo.style.color = "#ff4d4d";
-    } else {
-        expiryInfo.textContent = "Valid until: " + expDate.toLocaleString();
-        expiryInfo.style.color = "#00ff88";
+    startCountdown(expTime);
+
+    if (payload.iat) {
+        const issued = new Date(payload.iat * 1000);
+        expiryInfo.textContent +=
+            " | Issued: " + issued.toLocaleString();
     }
+
+    expiryInfo.textContent +=
+        " | Expires: " + expDate.toLocaleString();
+}
+
+function startCountdown(expTime) {
+
+    const status = document.getElementById("jwtStatus");
+
+    countdownInterval = setInterval(() => {
+
+        const now = Date.now();
+        const diff = expTime - now;
+
+        if (diff <= 0) {
+            clearInterval(countdownInterval);
+            status.textContent = "⚠ Token Expired";
+            status.style.color = "#ff4d4d";
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        status.textContent =
+            `Valid | Expires in: ${hours}h ${minutes}m ${seconds}s`;
+
+        status.style.color = "#00ff88";
+
+    }, 1000);
 }
 
 function copyOutput(id) {
     const value = document.getElementById(id).value;
     if (!value) return;
+
     navigator.clipboard.writeText(value)
         .then(() => alert("Copied!"));
 }
 
 function clearJWT() {
+
+    clearInterval(countdownInterval);
+
     document.getElementById("jwtInput").value = "";
     document.getElementById("headerOutput").value = "";
     document.getElementById("payloadOutput").value = "";
