@@ -5,6 +5,12 @@ function base64UrlEncode(str) {
         .replace(/\//g, '_');
 }
 
+function showStatus(msg, color) {
+    const status = document.getElementById("genStatus");
+    status.textContent = msg;
+    status.style.color = color;
+}
+
 function generateJWT() {
 
     const header = {
@@ -17,7 +23,7 @@ function generateJWT() {
     const expirySeconds = document.getElementById("expiryInput").value;
 
     if (!secret) {
-        alert("Enter secret key");
+        showStatus("Enter secret key", "#ff4d4d");
         return;
     }
 
@@ -26,7 +32,7 @@ function generateJWT() {
     try {
         payload = JSON.parse(payloadText);
     } catch {
-        alert("Invalid JSON payload");
+        showStatus("Invalid JSON payload", "#ff4d4d");
         return;
     }
 
@@ -48,9 +54,20 @@ function generateJWT() {
     const token = data + "." + signatureBase64;
 
     document.getElementById("tokenOutput").value = token;
+
+    showStatus("Token Generated Successfully", "#00ff88");
 }
 
 function copyToken() {
     const token = document.getElementById("tokenOutput").value;
+    if (!token) return;
     navigator.clipboard.writeText(token);
+}
+
+function clearGenerator() {
+    document.getElementById("payloadInput").value = "";
+    document.getElementById("secretInput").value = "";
+    document.getElementById("expiryInput").value = "";
+    document.getElementById("tokenOutput").value = "";
+    showStatus("Status: Waiting...", "#cfd8dc");
 }
