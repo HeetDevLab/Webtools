@@ -115,10 +115,13 @@ function verifySignature() {
     const headerPayload = parts[0] + "." + parts[1];
     const signature = parts[2];
 
-    const computed = base64UrlEncode(
-        CryptoJS.HmacSHA256(headerPayload, secret)
-    );
+    const hash = CryptoJS.HmacSHA256(headerPayload, secret);
+const base64 = CryptoJS.enc.Base64.stringify(hash);
 
+const computed = base64
+    .replace(/=+$/, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
     if (computed === signature) {
         result.textContent = "✔ Signature Valid (HS256)";
         result.style.color = "#00ff88";
