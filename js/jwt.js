@@ -8,24 +8,24 @@ function base64UrlDecode(str) {
     return atob(str);
 }
 
+// Base64URL encode
+function base64UrlEncode(wordArray) {
+    return CryptoJS.enc.Base64.stringify(wordArray)
+        .replace(/=+$/, '')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_');
+}
+
 function decodeJWT() {
 
     const input = document.getElementById("jwtInput").value.trim();
-    const status = document.getElementById("jwtStatus");
-
     clearInterval(countdownInterval);
 
-    if (!input) {
-        showStatus("Enter token first", "error");
-        return;
-    }
+    if (!input) return showStatus("Enter token first", "error");
 
     const parts = input.split(".");
-
-    if (parts.length !== 3) {
-        showStatus("Invalid JWT format", "error");
-        return;
-    }
+    if (parts.length !== 3)
+        return showStatus("Invalid JWT format", "error");
 
     try {
 
@@ -39,8 +39,9 @@ function decodeJWT() {
             JSON.stringify(payload, null, 2);
 
         analyzeToken(header, payload);
+        showStatus("Token Decoded", "success");
 
-    } catch (err) {
+    } catch {
         showStatus("Error decoding token", "error");
     }
 }
@@ -50,50 +51,20 @@ function analyzeToken(header, payload) {
     const expiryInfo = document.getElementById("expiryInfo");
     expiryInfo.textContent = "";
 
-    let warnings = [];
-
-    // Algorithm check
-    if (!header.alg) {
-        warnings.push("Missing algorithm");
-    }
-
     if (header.alg === "none") {
-        warnings.push("Algorithm 'none' is insecure");
-    }
-
-    if (header.alg === "HS256") {
-        warnings.push("HS256 requires strong secret key");
-    }
-
-    // Expiry check
-    if (!payload.exp) {
-        warnings.push("Token has no expiry");
-    }
-
-    // Issued check
-    if (payload.iat) {
-        const issued = new Date(payload.iat * 1000);
-        expiryInfo.textContent +=
-            "Issued: " + issued.toLocaleString() + " | ";
+        showStatus("⚠ Insecure: alg=none", "warning");
     }
 
     if (payload.exp) {
-
         const expTime = payload.exp * 1000;
         const expDate = new Date(expTime);
 
-        expiryInfo.textContent +=
+        expiryInfo.textContent =
             "Expires: " + expDate.toLocaleString();
 
         startCountdown(expTime);
-    }
-
-    // Final status
-    if (warnings.length > 0) {
-        showStatus("⚠ Token Decoded with Warnings", "warning");
-        expiryInfo.textContent += "\nWarnings: " + warnings.join(", ");
     } else {
-        showStatus("✔ Token Looks Structurally Safe", "success");
+        expiryInfo.textContent = "No expiry claim";
     }
 }
 
@@ -101,8 +72,7 @@ function startCountdown(expTime) {
 
     countdownInterval = setInterval(() => {
 
-        const now = Date.now();
-        const diff = expTime - now;
+        const diff = expTime - Date.now();
 
         if (diff <= 0) {
             clearInterval(countdownInterval);
@@ -110,54 +80,83 @@ function startCountdown(expTime) {
             return;
         }
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
         showStatus(
-            `✔ Valid | Expires in: ${hours}h ${minutes}m ${seconds}s`,
+            `Valid | Expires in: ${h}h ${m}m ${s}s`,
             "success"
         );
 
     }, 1000);
 }
 
-function showStatus(message, type) {
+// 🔐 HS256 Signature Verification
+function verifySignature() {
+
+    const token = document.getElementById("jwtInput").value.trim();
+    const secret = document.getElementById("secretKey").value.trim();
+    const result = document.getElementById("verifyResult");
+
+    if (!token || !secret) {
+        result.textContent = "Provide token & secret key";
+        result.style.color = "#ffc107";
+        return;
+    }
+
+    const parts = token.split(".");
+    if (parts.length !== 3) {
+        result.textContent = "Invalid token format";
+        result.style.color = "#ff4d4d";
+        return;
+    }
+
+    const headerPayload = parts[0] + "." + parts[1];
+    const signature = parts[2];
+
+    const computed = base64UrlEncode(
+        CryptoJS.HmacSHA256(headerPayload, secret)
+    );
+
+    if (computed === signature) {
+        result.textContent = "✔ Signature Valid (HS256)";
+        result.style.color = "#00ff88";
+    } else {
+        result.textContent = "❌ Invalid Signature";
+        result.style.color = "#ff4d4d";
+    }
+}
+
+function showStatus(msg, type) {
 
     const status = document.getElementById("jwtStatus");
-
-    status.textContent = message;
+    status.textContent = msg;
 
     if (type === "success") {
         status.style.color = "#00ff88";
-        status.style.boxShadow = "0 0 15px #00ff88";
     }
     else if (type === "warning") {
         status.style.color = "#ffc107";
-        status.style.boxShadow = "0 0 15px #ffc107";
     }
     else {
         status.style.color = "#ff4d4d";
-        status.style.boxShadow = "0 0 15px #ff4d4d";
     }
 }
 
 function copyOutput(id) {
     const value = document.getElementById(id).value;
     if (!value) return;
-
-    navigator.clipboard.writeText(value)
-        .then(() => alert("Copied!"));
+    navigator.clipboard.writeText(value);
 }
 
 function clearJWT() {
-
     clearInterval(countdownInterval);
-
     document.getElementById("jwtInput").value = "";
     document.getElementById("headerOutput").value = "";
     document.getElementById("payloadOutput").value = "";
+    document.getElementById("secretKey").value = "";
+    document.getElementById("verifyResult").textContent = "Verification: -";
     document.getElementById("expiryInfo").textContent = "Expiry: -";
-    document.getElementById("jwtStatus").textContent = "Status: Waiting...";
-    document.getElementById("jwtStatus").style.boxShadow = "none";
+    showStatus("Status: Waiting...", "success");
 }
