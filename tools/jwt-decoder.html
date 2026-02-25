@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT Decoder | HeetDevLab</title>
+
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/hash-generator.css">
+</head>
+
+<body>
+
+<div class="content">
+
+<section class="hero">
+<h1>🧬 JWT Decoder</h1>
+<p>Decode & inspect JSON Web Tokens securely.</p>
+</section>
+
+<section class="checker-box">
+
+<textarea id="jwtInput" placeholder="Paste JWT token here..."></textarea>
+
+<button class="btn primary-btn" onclick="decodeJWT()">Decode Token</button>
+
+<div class="jwt-status" id="jwtStatus">
+Status: Waiting...
+</div>
+
+<h3>Header</h3>
+<textarea id="headerOutput" readonly></textarea>
+
+<h3>Payload</h3>
+<textarea id="payloadOutput" readonly></textarea>
+
+<div class="metrics">
+<span id="expiryInfo">Expiry: -</span>
+</div>
+
+<button class="btn small-btn" onclick="copyOutput('headerOutput')">Copy Header</button>
+<button class="btn small-btn" onclick="copyOutput('payloadOutput')">Copy Payload</button>
+
+<button class="btn" onclick="clearJWT()">Clear</button>
+
+</section>
+
+<div style="text-align:center; margin-top:30px;">
+<a href="../index.html" class="btn">← Back to Tools</a>
+</div>
+
+</div>
+
+<script src="../js/jwt.js"></script>
+</body>
+</html>
