@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JWT Generator</title>
+
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+
+<body style="background:#111;color:white;font-family:monospace;padding:20px;">
+
+<h2>JWT Generator (HS256)</h2>
+
+<h3>Payload (JSON)</h3>
+<textarea id="payloadInput" rows="8" style="width:100%;">
+{
+  "user": "Heet",
+  "role": "admin"
+}
+</textarea>
+
+<br><br>
+
+<label>Expiry (seconds from now):</label><br>
+<input type="number" id="expiryInput" placeholder="3600">
+
+<br><br>
+
+<label>Secret Key:</label><br>
+<input type="text" id="secretInput" placeholder="Enter secret">
+
+<br><br>
+
+<button onclick="generateJWT()">Generate Token</button>
+
+<h3>Generated JWT</h3>
+<textarea id="tokenOutput" rows="4" style="width:100%;"></textarea>
+
+<br>
+<button onclick="copyToken()">Copy</button>
+
+<script src="../js/jwt-generator.js"></script>
+
+</body>
+</html>
