@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Compare Tool | HeetDevLab</title>
+
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/hash-generator.css">
+</head>
+
+<body>
+
+<div class="content">
+
+<section class="hero">
+<h1>🧪 Advanced Hash Compare</h1>
+<p>Verify file integrity & detect algorithm type.</p>
+</section>
+
+<section class="checker-box">
+
+<textarea id="hash1" placeholder="Paste original hash..."></textarea>
+<textarea id="hash2" placeholder="Paste downloaded file hash..."></textarea>
+
+<div class="compare-result" id="compareResult">
+Status: Waiting...
+</div>
+
+<div class="algo-info" id="algoInfo">
+Algorithm: -
+</div>
+
+<div class="metrics">
+<span id="lengthInfo">Length: -</span>
+</div>
+
+<div style="display:flex; gap:10px;">
+<button class="btn small-btn" onclick="copyHash('hash1')">Copy 1</button>
+<button class="btn small-btn" onclick="copyHash('hash2')">Copy 2</button>
+</div>
+
+<button class="btn" onclick="clearCompare()">Clear</button>
+
+</section>
+
+<div style="text-align:center; margin-top:30px;">
+<a href="../index.html" class="btn">← Back to Tools</a>
+</div>
+
+</div>
+
+<script src="../js/hash-compare.js"></script>
+</body>
+</html>
