@@ -203,3 +203,10 @@ a.btn {
     font-size: 0.9rem;
     color: #00f5ff;
 }
+.jwt-status {
+    text-align: center;
+    margin: 20px 0;
+    padding: 12px;
+    border-radius: 15px;
+    background: rgba(0,0,0,0.3);
+}
