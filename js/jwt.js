@@ -11,7 +11,7 @@ function base64UrlDecode(str) {
     return atob(str);
 }
 
-// ===== SHOW STATUS =====
+// ===== STATUS =====
 function showStatus(msg, color) {
     const status = document.getElementById("jwtStatus");
     status.textContent = msg;
@@ -48,10 +48,13 @@ function decodeJWT() {
 
         showStatus("Token Decoded", "#00ff88");
 
-        // expiry check
+        // Expiry check
         if (payload.exp) {
             const expTime = payload.exp * 1000;
             startCountdown(expTime);
+        } else {
+            document.getElementById("expiryInfo").textContent =
+                "No expiry claim";
         }
 
     } catch (e) {
@@ -71,6 +74,7 @@ function startCountdown(expTime) {
         if (diff <= 0) {
             clearInterval(countdownInterval);
             expiryInfo.textContent = "Token Expired";
+            showStatus("Expired", "#ff4d4d");
             return;
         }
 
@@ -81,51 +85,9 @@ function startCountdown(expTime) {
         expiryInfo.textContent =
             `Expires in: ${h}h ${m}m ${s}s`;
 
+        showStatus("Valid Token", "#00ff88");
+
     }, 1000);
-}
-
-// ===== VERIFY SIGNATURE (HS256 ONLY) =====
-function verifySignature() {
-
-    const token = document.getElementById("jwtInput").value.trim();
-    const secret = document.getElementById("secretKey").value.trim();
-    const result = document.getElementById("verifyResult");
-
-    if (!token || !secret) {
-        result.textContent = "Provide token & secret";
-        result.style.color = "#ffc107";
-        return;
-    }
-
-    const parts = token.split(".");
-    if (parts.length !== 3) {
-        result.textContent = "Invalid token format";
-        result.style.color = "#ff4d4d";
-        return;
-    }
-
-    const headerPayload = parts[0] + "." + parts[1];
-    const signature = parts[2];
-
-    // HMAC SHA256
-    const hash = CryptoJS.HmacSHA256(headerPayload, secret);
-
-    // Convert to Base64
-    let base64 = CryptoJS.enc.Base64.stringify(hash);
-
-    // Convert Base64 → Base64URL
-    base64 = base64
-        .replace(/=+$/, '')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_');
-
-    if (base64 === signature) {
-        result.textContent = "✔ Signature Valid (HS256)";
-        result.style.color = "#00ff88";
-    } else {
-        result.textContent = "❌ Invalid Signature";
-        result.style.color = "#ff4d4d";
-    }
 }
 
 // ===== COPY =====
@@ -141,8 +103,6 @@ function clearJWT() {
     document.getElementById("jwtInput").value = "";
     document.getElementById("headerOutput").value = "";
     document.getElementById("payloadOutput").value = "";
-    document.getElementById("secretKey").value = "";
-    document.getElementById("verifyResult").textContent = "Verification: -";
     document.getElementById("expiryInfo").textContent = "";
     showStatus("Waiting...", "#00ff88");
 }
