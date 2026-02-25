@@ -1,44 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>JWT Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT Generator | HeetDevLab</title>
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/hash-generator.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 
-<body style="background:#111;color:white;font-family:monospace;padding:20px;">
+<body>
 
-<h2>JWT Generator (HS256)</h2>
+<div class="content">
 
-<h3>Payload (JSON)</h3>
-<textarea id="payloadInput" rows="8" style="width:100%;">
-{
+<section class="hero">
+<h1>🧬 JWT Generator</h1>
+<p>Create signed JWT tokens securely (HS256).</p>
+</section>
+
+<section class="checker-box">
+
+<label>Payload (JSON)</label>
+<textarea id="payloadInput" placeholder='{
   "user": "Heet",
   "role": "admin"
-}
-</textarea>
+}'></textarea>
 
-<br><br>
+<label>Expiry (seconds from now)</label>
+<input type="number" id="expiryInput" class="hash-select" placeholder="3600">
 
-<label>Expiry (seconds from now):</label><br>
-<input type="number" id="expiryInput" placeholder="3600">
+<label>Secret Key</label>
+<input type="text" id="secretInput" class="hash-select" placeholder="Enter secret key">
 
-<br><br>
+<button class="btn primary-btn" onclick="generateJWT()">Generate Token</button>
 
-<label>Secret Key:</label><br>
-<input type="text" id="secretInput" placeholder="Enter secret">
+<div class="result-box">
+<textarea id="tokenOutput" readonly placeholder="Generated JWT will appear here..."></textarea>
+</div>
 
-<br><br>
+<div class="metrics">
+<span id="genStatus">Status: Waiting...</span>
+</div>
 
-<button onclick="generateJWT()">Generate Token</button>
+<button class="btn small-btn" onclick="copyToken()">Copy Token</button>
+<button class="btn" onclick="clearGenerator()">Clear</button>
 
-<h3>Generated JWT</h3>
-<textarea id="tokenOutput" rows="4" style="width:100%;"></textarea>
+</section>
 
-<br>
-<button onclick="copyToken()">Copy</button>
+<div style="text-align:center;margin-top:30px;">
+<a href="../index.html" class="btn">← Back to Tools</a>
+</div>
+
+</div>
 
 <script src="../js/jwt-generator.js"></script>
 
