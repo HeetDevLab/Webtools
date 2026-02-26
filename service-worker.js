@@ -1,4 +1,4 @@
-const CACHE_NAME = "heetdevlab-webtools-v1";
+const CACHE_NAME = "heetdevlab-webtools-v2";
 
 const urlsToCache = [
   "/Webtools/",
@@ -10,6 +10,7 @@ const urlsToCache = [
 
 // Install
 self.addEventListener("install", event => {
+  self.skipWaiting(); // Force new SW
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
@@ -29,12 +30,12 @@ self.addEventListener("activate", event => {
       );
     })
   );
+  return self.clients.claim();
 });
 
 // Fetch
 self.addEventListener("fetch", event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
