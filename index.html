@@ -211,11 +211,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
- <script>
-window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
+<script>
+window.addEventListener("load", function () {
+  document.body.classList.add("page-loaded");
 });
- </script>
+</script>
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
