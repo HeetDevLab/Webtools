@@ -1,4 +1,4 @@
-const CACHE_NAME = "heetdevlab-webtools-v2";
+const CACHE_NAME = "heetdevlab-webtools-v2.1";
 
 const urlsToCache = [
   "/Webtools/",
