@@ -153,6 +153,7 @@
 
 
 <footer style="text-align:center; padding:40px 20px; font-size:0.8rem; color:#888;">
+    <p>Version: v2.0</p>
     <p>© 2026 HeetDevLab • Privacy First • Indie Built</p>
 </footer>
 
@@ -210,6 +211,48 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
+ <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/Webtools/service-worker.js")
+    .then(reg => {
+
+      reg.onupdatefound = () => {
+        const newWorker = reg.installing;
+
+        newWorker.onstatechange = () => {
+          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+            showUpdatePopup();
+          }
+        };
+      };
+    });
+}
+
+function showUpdatePopup() {
+  const updateDiv = document.createElement("div");
+  updateDiv.innerHTML = `
+    <div style="
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#00f0ff;
+      color:#000;
+      padding:15px 20px;
+      border-radius:30px;
+      box-shadow:0 0 20px #00f0ff;
+      z-index:9999;
+      font-weight:bold;">
+      🚀 New version available
+      <button onclick="window.location.reload()" 
+        style="margin-left:15px;padding:5px 10px;border:none;border-radius:15px;background:#000;color:#00f0ff;cursor:pointer;">
+        Update
+      </button>
+    </div>
+  `;
+  document.body.appendChild(updateDiv);
+}
+ </script>
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
