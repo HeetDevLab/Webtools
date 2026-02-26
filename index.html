@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
- <script>
+<script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/Webtools/service-worker.js")
     .then(reg => {
@@ -221,14 +221,14 @@ if ("serviceWorker" in navigator) {
 
         newWorker.onstatechange = () => {
           if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-            showUpdatePopup();
+            showUpdatePopup(newWorker);
           }
         };
       };
     });
 }
 
-function showUpdatePopup() {
+function showUpdatePopup(worker) {
   const updateDiv = document.createElement("div");
   updateDiv.innerHTML = `
     <div style="
@@ -244,15 +244,23 @@ function showUpdatePopup() {
       z-index:9999;
       font-weight:bold;">
       🚀 New version available
-      <button onclick="window.location.reload()" 
+      <button id="updateNow"
         style="margin-left:15px;padding:5px 10px;border:none;border-radius:15px;background:#000;color:#00f0ff;cursor:pointer;">
         Update
       </button>
     </div>
   `;
   document.body.appendChild(updateDiv);
+
+  document.getElementById("updateNow").addEventListener("click", () => {
+    worker.postMessage("SKIP_WAITING");
+  });
 }
- </script>
+
+navigator.serviceWorker.addEventListener("controllerchange", () => {
+  window.location.reload();
+});
+</script>
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js")
