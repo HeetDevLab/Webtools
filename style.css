@@ -375,3 +375,20 @@ body.nav-open{
     font-size: 14px;
     color: #00ff88;
 }
+.install-btn {
+  background: linear-gradient(45deg, #00f0ff, #0077ff);
+  color: #000;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00f0ff;
+  margin: 20px auto;
+  display: block;
+  transition: 0.3s;
+}
+
+.install-btn:hover {
+  transform: scale(1.05);
+}
