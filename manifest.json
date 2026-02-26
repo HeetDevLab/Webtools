@@ -1,11 +1,11 @@
 {
   "name": "HeetDevLab WebTools",
   "short_name": "WebTools",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/Webtools/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0f2c",
-  "theme_color": "#00f0ff",
+  "theme_color": "#00bfff",
   "icons": [
     {
       "src": "icon-192.png",
