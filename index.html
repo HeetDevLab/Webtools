@@ -8,7 +8,7 @@
 <meta name="description" content="Free privacy-focused cyber tools including password generator, hash generator, secure notes and more. 100% client-side.">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
- <link rel="manifest" href="/manifest.json">
+ <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#00f0ff">
 </head>
 
@@ -208,11 +208,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
- <script>
+<script>
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js")
-    .then(() => console.log("Service Worker Registered"));
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("SW registered"));
 }
- </script>
+</script>
 </body>
 </html>
