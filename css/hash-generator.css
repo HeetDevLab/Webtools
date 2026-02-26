@@ -2,6 +2,15 @@
    HASH GENERATOR - FINAL POLISH
    HeetDevLab Secure Tools
    =============================== */
+.tool-container,
+.hero,
+.seo-content {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 /* HERO */
 
 
