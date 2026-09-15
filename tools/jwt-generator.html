@@ -2,60 +2,68 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>JWT Generator | HeetDevLab</title>
-
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/hash-generator.css">
-
+<meta name="description" content="Create HS256 JSON Web Tokens locally in your browser with HeetDevLab.">
+<meta name="theme-color" content="#03091d">
+<link rel="icon" href="../favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<style>
+:root{--bg:#03091d;--panel:#081735;--text:#edf6ff;--muted:#91a4c0;--cyan:#16d0ff;--line:rgba(55,190,255,.18);--green:#4dffae}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 15% 10%,rgba(0,122,255,.22),transparent 34%),radial-gradient(circle at 85% 40%,rgba(20,65,255,.15),transparent 42%),linear-gradient(180deg,#061332,#03091d 72%)}#particles-js{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.4}
+.navbar{height:72px;border-bottom:1px solid var(--line);background:rgba(3,9,29,.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:1000}.nav-container{width:min(1180px,calc(100% - 28px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;position:relative}.nav-brand a{display:flex;align-items:center;gap:9px;text-decoration:none}.brand-mark{width:30px;height:30px;border:1px solid rgba(24,215,232,.38);border-radius:9px;display:grid;place-items:center;color:#18d7e8;font:800 11px ui-monospace,monospace;background:rgba(24,215,232,.08)}.brand-name{font-size:23px;font-weight:800;letter-spacing:-1.1px}.brand-name span,.brand-name b{color:var(--cyan)}.nav-links{display:flex;gap:23px}.nav-links a{color:#aebed3;text-decoration:none;font-size:13px;font-weight:650}.nav-links a:hover{color:#fff}.hamburger{display:none;width:38px;height:38px;position:relative;cursor:pointer}.hamburger span{position:absolute;left:6px;width:26px;height:3px;background:#fff;border-radius:9px;transition:.25s}.hamburger span:nth-child(1){top:9px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:25px}.hamburger.active span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){top:17px;transform:rotate(-45deg)}
+.content{width:min(900px,calc(100% - 28px));margin:auto;padding-bottom:30px}.hero{text-align:center;padding:64px 8px 34px}.eyebrow{font-size:10px;font-weight:850;letter-spacing:2px;color:#83a0c7;margin-bottom:13px}.hero h1{margin:0;font-size:clamp(38px,7vw,64px);line-height:1.05;letter-spacing:-2px}.hero h1 span{color:var(--cyan)}.hero p{margin:13px auto 0;color:var(--muted);font-size:15px;line-height:1.6}.checker-box{padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(13,39,79,.78),rgba(6,18,43,.9))}label{display:block;color:#b9c9dd;font-size:12px;font-weight:700;margin:18px 0 8px}textarea,input{width:100%;border:1px solid rgba(55,190,255,.2);outline:none;border-radius:13px;background:rgba(2,10,27,.72);color:#edf6ff;font:14px/1.6 ui-monospace,monospace;padding:14px}textarea:focus,input:focus{border-color:rgba(22,208,255,.65);box-shadow:0 0 0 3px rgba(22,208,255,.08)}textarea{resize:vertical}.payload{min-height:170px}.token{min-height:150px}.btn{border:0;border-radius:12px;padding:12px 17px;background:var(--cyan);color:#02101c;font-size:13px;font-weight:850;cursor:pointer;box-shadow:0 10px 28px rgba(0,208,255,.16);margin-top:14px}.small-btn{padding:9px 13px;margin:8px 6px 0 0}.status{margin-top:18px;padding:12px 14px;border-radius:12px;background:rgba(2,10,27,.62);border:1px solid var(--line);color:#a9bbd3;font-size:12px}.status.ok{color:var(--green)}.status.error{color:#ff8796}.back{text-align:center;margin:28px 0}footer{text-align:center;padding:42px 20px;color:#667892;font-size:11px;border-top:1px solid var(--line)}
+@media(max-width:768px){.navbar{height:64px}.hamburger{display:block}.nav-links{display:none;position:absolute;top:57px;left:0;right:0;padding:10px;background:rgba(3,10,29,.98);border:1px solid var(--line);border-radius:15px;flex-direction:column;gap:0;box-shadow:0 18px 45px rgba(0,0,0,.45)}.nav-links.open{display:flex}.nav-links a{padding:13px;border-bottom:1px solid rgba(55,190,255,.08)}.nav-links a:last-child{border:0}.content{width:calc(100% - 20px)}.hero{padding:48px 4px 28px}.hero h1{font-size:clamp(34px,10vw,48px);letter-spacing:-1.2px}.hero p{font-size:14px}.checker-box{padding:18px 14px;border-radius:18px}textarea,input{font-size:13px}}
+</style>
 </head>
-
 <body>
-
-<div class="content">
-
-<section class="hero">
-<h1>🧬 JWT Generator</h1>
-<p>Create signed JWT tokens securely (HS256).</p>
-</section>
-
+<div id="particles-js"></div>
+<nav class="navbar"><div class="nav-container">
+<div class="nav-brand"><a href="../index.html"><span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span></a></div>
+<div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu"><span></span><span></span><span></span></div>
+<div class="nav-links" id="navLinks"><a href="../index.html">Home</a><a href="../index.html#tools">WebTools</a><a href="../../Sentinex/">Sentinex</a><a href="../../Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a></div>
+</div></nav>
+<main class="content">
+<section class="hero"><div class="eyebrow">HEETDEVLAB / WEBTOOLS</div><h1>🧬 JWT <span>Generator</span></h1><p>Create signed HS256 JSON Web Tokens locally in your browser.</p></section>
 <section class="checker-box">
-
-<label>Payload (JSON)</label>
-<textarea id="payloadInput" placeholder='{
+<label for="payloadInput">Payload (JSON)</label>
+<textarea class="payload" id="payloadInput" placeholder='{
   "user": "Heet",
   "role": "admin"
 }'></textarea>
-
-<label>Expiry (seconds from now)</label>
-<input type="number" id="expiryInput" class="hash-select" placeholder="3600">
-
-<label>Secret Key</label>
-<input type="text" id="secretInput" class="hash-select" placeholder="Enter secret key">
-
-<button class="btn primary-btn" onclick="generateJWT()">Generate Token</button>
-
-<div class="result-box">
-<textarea id="tokenOutput" readonly placeholder="Generated JWT will appear here..."></textarea>
-</div>
-
-<div class="metrics">
-<span id="genStatus">Status: Waiting...</span>
-</div>
-
+<label for="expiryInput">Expiry (seconds from now)</label>
+<input type="number" id="expiryInput" placeholder="3600" min="1">
+<label for="secretInput">Secret Key</label>
+<input type="text" id="secretInput" placeholder="Enter secret key">
+<button class="btn" onclick="generateJWT()">Generate Token</button>
+<label for="tokenOutput">Generated Token</label>
+<textarea class="token" id="tokenOutput" readonly placeholder="Generated JWT will appear here..."></textarea>
+<div class="status" id="genStatus">Status: Waiting...</div>
 <button class="btn small-btn" onclick="copyToken()">Copy Token</button>
-<button class="btn" onclick="clearGenerator()">Clear</button>
-
+<button class="btn small-btn" onclick="clearGenerator()">Clear</button>
 </section>
-
-<div style="text-align:center;margin-top:30px;">
-<a href="../index.html" class="btn">← Back to Tools</a>
-</div>
-
-</div>
-
-<script src="../js/jwt-generator.js"></script>
-
+<div class="back"><a href="../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+</main>
+<script>
+function b64url(s){return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(s)).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_')}
+function generateJWT(){
+ const status=document.getElementById('genStatus'),out=document.getElementById('tokenOutput'),secret=document.getElementById('secretInput').value;
+ try{
+  if(!secret)throw new Error('Enter a secret key.');
+  const payload=JSON.parse(document.getElementById('payloadInput').value||'{}');
+  const seconds=parseInt(document.getElementById('expiryInput').value,10);
+  if(Number.isFinite(seconds)&&seconds>0)payload.exp=Math.floor(Date.now()/1000)+seconds;
+  const header={alg:'HS256',typ:'JWT'},h=b64url(JSON.stringify(header)),p=b64url(JSON.stringify(payload)),data=h+'.'+p;
+  const sig=CryptoJS.HmacSHA256(data,secret).toString(CryptoJS.enc.Base64).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  out.value=data+'.'+sig;status.textContent='Status: JWT generated successfully.';status.className='status ok';
+ }catch(e){out.value='';status.textContent='Status: '+e.message;status.className='status error'}
+}
+function copyToken(){const v=document.getElementById('tokenOutput').value;if(v)navigator.clipboard.writeText(v)}
+function clearGenerator(){document.getElementById('payloadInput').value='';document.getElementById('expiryInput').value='';document.getElementById('secretInput').value='';document.getElementById('tokenOutput').value='';document.getElementById('genStatus').textContent='Status: Waiting...';document.getElementById('genStatus').className='status'}
+(function(){const h=document.getElementById('hamburger'),n=document.getElementById('navLinks');function toggle(){const o=n.classList.toggle('open');h.classList.toggle('active',o);h.setAttribute('aria-label',o?'Close menu':'Open menu')}h.onclick=toggle;h.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')toggle()};n.querySelectorAll('a').forEach(a=>a.onclick=()=>n.classList.remove('open'))})();
+if(window.particlesJS)particlesJS('particles-js',{particles:{number:{value:42,density:{enable:true,value_area:900}},color:{value:'#168cff'},shape:{type:'circle'},opacity:{value:.25},size:{value:2},line_linked:{enable:true,distance:145,color:'#168cff',opacity:.16,width:1},move:{enable:true,speed:.6}},interactivity:{events:{onhover:{enable:false}}}});
+</script>
 </body>
 </html>
