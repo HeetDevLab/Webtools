@@ -1,50 +1,1203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Secure PIN Generator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <!-- Particles -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<meta name="theme-color" content="#03091d">
+<title>Secure PIN Generator | HeetDevLab</title>
 
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="../css/pin.css">
+<meta name="description"
+content="Generate secure random PINs instantly in your browser. Privacy-first PIN generator by HeetDevLab.">
+
+<style>
+:root{
+  --bg:#03091d;
+  --panel:rgba(8,23,53,.88);
+  --text:#edf6ff;
+  --muted:#94a5bd;
+  --cyan:#16d0ff;
+  --line:rgba(55,190,255,.18);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-width:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+  "Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(0,122,255,.22),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(20,65,255,.16),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      #061332 0%,
+      #03091d 72%
+    );
+}
+
+#particles-js{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  opacity:.42;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:72px;
+
+  border-bottom:1px solid rgba(55,190,255,.14);
+
+  background:rgba(3,9,29,.88);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+.nav-container{
+  width:min(1180px,calc(100% - 32px));
+  height:100%;
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  position:relative;
+}
+
+
+/* BRAND */
+
+.nav-brand a{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+
+  text-decoration:none;
+  line-height:1;
+}
+
+.brand-mark{
+  width:30px;
+  height:30px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid rgba(24,215,232,.38);
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(24,215,232,.14),
+      rgba(22,89,255,.10)
+    );
+
+  box-shadow:
+    0 0 18px rgba(24,215,232,.10),
+    inset 0 0 14px rgba(24,215,232,.05);
+
+  color:#18d7e8;
+
+  font:
+    800 12px
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+
+  letter-spacing:-1px;
+}
+
+.brand-name{
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:-1px;
+  color:#f4f8ff;
+}
+
+.brand-name span{
+  background:
+    linear-gradient(
+      90deg,
+      #18d7e8,
+      #5ee7ff
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.brand-name b{
+  color:#18d7e8;
+  font-weight:900;
+}
+
+
+/* NAV LINKS */
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#b9c8dc;
+
+  font-size:13px;
+  font-weight:650;
+
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  color:#fff;
+}
+
+
+/* HAMBURGER */
+
+.hamburger{
+  display:none;
+
+  width:42px;
+  height:42px;
+
+  border:0;
+  background:transparent;
+
+  padding:0;
+
+  position:relative;
+
+  cursor:pointer;
+
+  z-index:1002;
+}
+
+.hamburger span{
+  position:absolute;
+
+  left:8px;
+
+  width:26px;
+  height:3px;
+
+  border-radius:99px;
+
+  background:#fff;
+
+  transition:.25s;
+}
+
+.hamburger span:nth-child(1){
+  top:11px;
+}
+
+.hamburger span:nth-child(2){
+  top:19px;
+}
+
+.hamburger span:nth-child(3){
+  top:27px;
+}
+
+
+/* HAMBURGER → X */
+
+.hamburger.active span:nth-child(1){
+  top:19px;
+  transform:rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2){
+  opacity:0;
+  transform:scaleX(0);
+}
+
+.hamburger.active span:nth-child(3){
+  top:19px;
+  transform:rotate(-45deg);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.page{
+  width:min(760px,calc(100% - 28px));
+  margin:auto;
+
+  padding:70px 0 0;
+}
+
+.hero{
+  text-align:center;
+}
+
+.eyebrow{
+  color:#83a0c7;
+
+  font-size:10px;
+  font-weight:850;
+
+  letter-spacing:2px;
+
+  margin-bottom:15px;
+}
+
+.hero h1{
+  margin:0;
+
+  font-size:
+    clamp(34px,7vw,58px);
+
+  line-height:1.05;
+
+  letter-spacing:-1.8px;
+
+  text-transform:uppercase;
+}
+
+.hero h1 span{
+  color:var(--cyan);
+}
+
+.hero p{
+  margin:15px auto 0;
+
+  color:var(--muted);
+
+  font-size:15px;
+  line-height:1.65;
+}
+
+
+/* =========================
+   PIN CARD
+========================= */
+
+.pin-card{
+  width:100%;
+  max-width:620px;
+
+  margin:38px auto 0;
+
+  padding:28px;
+
+  border:1px solid var(--line);
+
+  border-radius:22px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(13,39,79,.84),
+      rgba(6,18,43,.92)
+    );
+
+  box-shadow:
+    0 20px 55px rgba(0,40,130,.15);
+}
+
+
+/* PIN OUTPUT */
+
+#pinOutput{
+  width:100%;
+
+  min-height:76px;
+
+  border:1px solid rgba(55,190,255,.22);
+
+  border-radius:15px;
+
+  outline:none;
+
+  background:#030c21;
+
+  color:#fff;
+
+  text-align:center;
+
+  font-size:
+    clamp(30px,8vw,48px);
+
+  font-weight:800;
+
+  letter-spacing:7px;
+
+  padding:12px 16px;
+}
+
+#pinOutput::placeholder{
+  color:#526681;
+
+  font-size:16px;
+
+  letter-spacing:0;
+
+  font-weight:500;
+}
+
+
+/* CONTROLS */
+
+.controls{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr 1fr;
+
+  gap:11px;
+
+  margin-top:16px;
+}
+
+
+/* SELECT */
+
+select{
+  width:100%;
+  min-height:48px;
+
+  padding:0 13px;
+
+  border:1px solid rgba(55,190,255,.22);
+
+  border-radius:12px;
+
+  background:#061633;
+
+  color:#edf6ff;
+
+  outline:none;
+
+  font:inherit;
+
+  cursor:pointer;
+}
+
+
+/* BUTTON */
+
+.btn{
+  width:100%;
+  min-height:48px;
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border:0;
+
+  border-radius:12px;
+
+  padding:12px 18px;
+
+  background:var(--cyan);
+
+  color:#02101c;
+
+  text-decoration:none;
+
+  font-size:13px;
+
+  font-weight:850;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 30px rgba(0,208,255,.18);
+
+  transition:
+    transform .18s,
+    filter .18s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.05);
+}
+
+.btn:active{
+  transform:translateY(0);
+}
+
+
+/* COPY STATUS */
+
+.copy-status{
+  min-height:20px;
+
+  margin:14px 0 0;
+
+  color:#7eeaff;
+
+  font-size:12px;
+}
+
+
+/* BACK */
+
+.back{
+  text-align:center;
+
+  margin:30px 0 0;
+}
+
+.back .btn{
+  width:auto;
+  min-width:180px;
+}
+
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+
+  padding:
+    70px 20px
+    38px;
+
+  color:#687b97;
+
+  font-size:12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+  .navbar{
+    height:64px;
+  }
+
+  .nav-container{
+    width:calc(100% - 22px);
+  }
+
+  .brand-mark{
+    width:28px;
+    height:28px;
+
+    font-size:11px;
+  }
+
+  .brand-name{
+    font-size:21px;
+  }
+
+
+  /* HAMBURGER */
+
+  .hamburger{
+    display:block;
+  }
+
+
+  /* MOBILE MENU */
+
+  .nav-links{
+    display:none;
+
+    position:absolute;
+
+    top:57px;
+
+    left:0;
+    right:0;
+
+    padding:10px;
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    gap:0;
+
+    border:
+      1px solid
+      rgba(55,190,255,.20);
+
+    border-radius:16px;
+
+    background:
+      rgba(3,10,29,.98);
+
+    box-shadow:
+      0 20px 50px
+      rgba(0,0,0,.45);
+  }
+
+  body.nav-open .nav-links{
+    display:flex;
+  }
+
+  .nav-links a{
+    padding:14px 13px;
+
+    border-bottom:
+      1px solid
+      rgba(55,190,255,.08);
+  }
+
+  .nav-links a:last-child{
+    border-bottom:0;
+  }
+
+
+  /* PAGE */
+
+  .page{
+    width:calc(100% - 22px);
+
+    padding-top:50px;
+  }
+
+  .hero h1{
+    letter-spacing:-1px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+
+  /* CARD */
+
+  .pin-card{
+    margin-top:28px;
+
+    padding:18px;
+
+    border-radius:18px;
+  }
+
+  #pinOutput{
+    min-height:68px;
+  }
+
+
+  /* ONE COLUMN */
+
+  .controls{
+    grid-template-columns:1fr;
+
+    gap:10px;
+  }
+
+  .back .btn{
+    width:100%;
+  }
+
+}
+
+
+/* EXTRA SMALL */
+
+@media(max-width:380px){
+
+  .brand-name{
+    font-size:19px;
+  }
+
+  .brand-mark{
+    width:26px;
+    height:26px;
+  }
+
+  .page{
+    width:calc(100% - 18px);
+  }
+
+  .pin-card{
+    padding:15px;
+  }
+
+  #pinOutput{
+    letter-spacing:5px;
+  }
+}
+</style>
 </head>
+
+
 <body>
 
 <div id="particles-js"></div>
 
-<div class="hero">
 
-  <h1>🔢 SECURE PIN GENERATOR</h1>
-  <p>Generate strong random PIN instantly.</p>
+<!-- =========================
+     NAVBAR
+========================= -->
 
-  <div class="pin-card">
+<nav class="navbar">
 
-    <input type="text" id="pinOutput" readonly placeholder="Your PIN will appear here">
+  <div class="nav-container">
 
-    <div class="controls">
-      <select id="pinLength">
-        <option value="4">4 Digit</option>
-        <option value="6">6 Digit</option>
-        <option value="8">8 Digit</option>
-      </select>
+    <div class="nav-brand">
 
-      <button id="generateBtn" class="btn">Generate</button>
-      <button id="copyBtn" class="btn">Copy</button>
+      <a
+        href="../index.html"
+        aria-label="HeetDevLab Home"
+      >
+
+        <span class="brand-mark">
+          &lt;/&gt;
+        </span>
+
+        <span class="brand-name">
+          Heet<span>Dev</span>Lab<b>.</b>
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- MOBILE MENU BUTTON -->
+
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      type="button"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
+
+    <!-- NAV LINKS -->
+
+    <div
+      class="nav-links"
+      id="navLinks"
+    >
+
+      <a href="../index.html">
+        Home
+      </a>
+
+      <a href="../Sentinex/">
+        Sentinex
+      </a>
+
+      <a href="../Webtools/">
+        WebTools
+      </a>
+
+      <a href="../portfolio/">
+        Portfolio
+      </a>
+
+      <a href="../Blog/">
+        Blog
+      </a>
+
+      <a
+        href="https://youtube.com/@heetplayscode"
+        target="_blank"
+        rel="noopener"
+      >
+        YouTube
+      </a>
+
     </div>
 
   </div>
 
-  <br>
-  <a href="../index.html" class="btn">← Back to Tools</a>
+</nav>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="page">
+
+<section class="hero">
+
+  <div class="eyebrow">
+    HEETDEVLAB / WEBTOOLS
+  </div>
+
+  <h1>
+    🔢 Secure <span>PIN</span> Generator
+  </h1>
+
+  <p>
+    Generate strong random PINs instantly.
+    <br>
+    Everything happens locally in your browser.
+  </p>
+
+
+  <!-- PIN CARD -->
+
+  <div class="pin-card">
+
+    <input
+      type="text"
+      id="pinOutput"
+      readonly
+      placeholder="Your PIN will appear here"
+    >
+
+
+    <div class="controls">
+
+      <select
+        id="pinLength"
+        aria-label="PIN length"
+      >
+
+        <option value="4">
+          4 Digit PIN
+        </option>
+
+        <option value="6">
+          6 Digit PIN
+        </option>
+
+        <option value="8">
+          8 Digit PIN
+        </option>
+
+      </select>
+
+
+      <button
+        id="generateBtn"
+        class="btn"
+        type="button"
+      >
+        Generate
+      </button>
+
+
+      <button
+        id="copyBtn"
+        class="btn"
+        type="button"
+      >
+        Copy
+      </button>
+
+    </div>
+
+
+    <p
+      class="copy-status"
+      id="copyStatus"
+    ></p>
+
+  </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<div class="back">
+
+  <a
+    href="../index.html"
+    class="btn"
+  >
+    ← Back to Tools
+  </a>
 
 </div>
 
-<script src="../js/pin.js"></script>
-<script src="../particles-config.js"></script>
-<footer style="text-align:center; padding:40px 20px; font-size:0.8rem; color:#888;">
-  © 2026 HeetDevLab • Privacy First • Indie Built
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+  © 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳
 </footer>
+
+
+<!-- =========================
+     PIN GENERATOR
+========================= -->
+
+<script>
+
+(function(){
+
+  const hamburger =
+    document.getElementById("hamburger");
+
+  const navLinks =
+    document.getElementById("navLinks");
+
+
+  /* =====================
+     MOBILE NAV
+  ===================== */
+
+  hamburger.addEventListener(
+    "click",
+    function(){
+
+      const open =
+        hamburger.classList.toggle("active");
+
+      document.body.classList.toggle(
+        "nav-open",
+        open
+      );
+
+      hamburger.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+      hamburger.setAttribute(
+        "aria-label",
+        open
+          ? "Close menu"
+          : "Open menu"
+      );
+
+    }
+  );
+
+
+  navLinks
+    .querySelectorAll("a")
+    .forEach(function(link){
+
+      link.addEventListener(
+        "click",
+        function(){
+
+          hamburger.classList.remove(
+            "active"
+          );
+
+          document.body.classList.remove(
+            "nav-open"
+          );
+
+          hamburger.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+      );
+
+    });
+
+
+  window.addEventListener(
+    "resize",
+    function(){
+
+      if(window.innerWidth > 768){
+
+        hamburger.classList.remove(
+          "active"
+        );
+
+        document.body.classList.remove(
+          "nav-open"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =====================
+     PIN GENERATOR
+  ===================== */
+
+  const output =
+    document.getElementById(
+      "pinOutput"
+    );
+
+  const lengthSelect =
+    document.getElementById(
+      "pinLength"
+    );
+
+  const generateBtn =
+    document.getElementById(
+      "generateBtn"
+    );
+
+  const copyBtn =
+    document.getElementById(
+      "copyBtn"
+    );
+
+  const copyStatus =
+    document.getElementById(
+      "copyStatus"
+    );
+
+
+  /* SECURE RANDOM DIGIT */
+
+  function secureDigit(){
+
+    const array =
+      new Uint32Array(1);
+
+    crypto.getRandomValues(
+      array
+    );
+
+    return String(
+      array[0] % 10
+    );
+
+  }
+
+
+  /* GENERATE PIN */
+
+  function generatePIN(){
+
+    const length =
+      parseInt(
+        lengthSelect.value,
+        10
+      );
+
+    let pin = "";
+
+    for(
+      let i = 0;
+      i < length;
+      i++
+    ){
+
+      pin += secureDigit();
+
+    }
+
+    output.value = pin;
+
+    copyStatus.textContent = "";
+
+  }
+
+
+  /* COPY PIN */
+
+  async function copyPIN(){
+
+    if(!output.value){
+
+      generatePIN();
+
+    }
+
+
+    try{
+
+      await navigator
+        .clipboard
+        .writeText(
+          output.value
+        );
+
+      copyStatus.textContent =
+        "✓ PIN copied to clipboard";
+
+    }
+
+    catch(error){
+
+      output.select();
+
+      document.execCommand(
+        "copy"
+      );
+
+      copyStatus.textContent =
+        "✓ PIN copied";
+
+    }
+
+
+    setTimeout(
+      function(){
+
+        copyStatus.textContent = "";
+
+      },
+      1800
+    );
+
+  }
+
+
+  generateBtn.addEventListener(
+    "click",
+    generatePIN
+  );
+
+  copyBtn.addEventListener(
+    "click",
+    copyPIN
+  );
+
+  lengthSelect.addEventListener(
+    "change",
+    generatePIN
+  );
+
+
+  /* FIRST PIN */
+
+  generatePIN();
+
+})();
+
+</script>
+
+
+<!-- =========================
+     PARTICLES
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+
+if(
+  window.particlesJS &&
+  !document
+    .getElementById("particles-js")
+    .dataset.ready
+){
+
+  document
+    .getElementById("particles-js")
+    .dataset.ready = "1";
+
+
+  particlesJS(
+    "particles-js",
+    {
+
+      particles:{
+
+        number:{
+          value:42,
+          density:{
+            enable:true,
+            value_area:900
+          }
+        },
+
+        color:{
+          value:"#168cff"
+        },
+
+        shape:{
+          type:"circle"
+        },
+
+        opacity:{
+          value:.24
+        },
+
+        size:{
+          value:2
+        },
+
+        line_linked:{
+          enable:true,
+          distance:145,
+          color:"#168cff",
+          opacity:.15,
+          width:1
+        },
+
+        move:{
+          enable:true,
+          speed:.6
+        }
+
+      },
+
+      interactivity:{
+        events:{
+          onhover:{
+            enable:false
+          }
+        }
+      }
+
+    }
+  );
+
+}
+
+</script>
+
 </body>
 </html>
