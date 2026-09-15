@@ -1,66 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hash Compare Tool | HeetDevLab</title>
+<style>
+:root{--bg:#03091d;--panel:#081735;--panel2:#0b2045;--text:#edf6ff;--muted:#94a5bd;--cyan:#16d0ff;--line:rgba(55,190,255,.18);--danger:#ff5c7a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 15% 10%,rgba(0,122,255,.22),transparent 34%),radial-gradient(circle at 85% 40%,rgba(20,65,255,.16),transparent 42%),linear-gradient(180deg,#061332 0%,#03091d 72%)}
+#particles-js{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.42}
+a{color:inherit}
+.navbar{height:72px;border-bottom:1px solid rgba(55,190,255,.14);background:rgba(3,8,25,.88);backdrop-filter:blur(14px);position:sticky;top:0;z-index:5000}
+.nav-container{height:100%;width:min(1180px,calc(100% - 32px));margin:auto;display:flex;align-items:center;justify-content:space-between;position:relative}
+.nav-brand a{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+.brand-mark{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid rgba(24,215,232,.38);border-radius:9px;background:linear-gradient(135deg,rgba(24,215,232,.14),rgba(22,89,255,.10));box-shadow:0 0 18px rgba(24,215,232,.10);font-family:ui-monospace,monospace;font-size:11px;font-weight:800;color:#18d7e8}
+.brand-name{font-size:23px;font-weight:800;letter-spacing:-1px;color:#f4f8ff}
+.brand-name span{color:#18d7e8}
+.brand-name b{color:#18d7e8}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{font-size:13px;color:#b8c8df;text-decoration:none}
+.nav-links a:hover{color:#18d7e8}
+.hamburger{display:none;width:38px;height:38px;position:relative;align-items:center;justify-content:center;cursor:pointer}
+.hamburger span{position:absolute;width:27px;height:3px;background:#fff;border-radius:99px;transition:.25s}
+.hamburger span:nth-child(1){top:9px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:25px}
+.hamburger.active span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){top:17px;transform:rotate(-45deg)}
+.container,.content{width:min(980px,calc(100% - 28px));margin:auto}
+.hero{text-align:center;padding:68px 10px 38px}
+.hero h1{margin:0;font-size:clamp(34px,7vw,58px);line-height:1.05;letter-spacing:-1.8px}
+.hero p{margin:13px auto 0;color:var(--muted);font-size:15px;line-height:1.6}
+.checker-box{width:min(760px,100%);margin:0 auto;padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(13,39,79,.82),rgba(6,18,43,.9));box-shadow:0 20px 60px rgba(0,30,90,.18)}
+input,textarea,select{width:100%;border:1px solid rgba(55,190,255,.2);border-radius:12px;background:#06142f;color:#edf6ff;padding:13px 14px;font:inherit;outline:none}
+input:focus,textarea:focus,select:focus{border-color:rgba(22,208,255,.65);box-shadow:0 0 0 3px rgba(22,208,255,.08)}
+textarea{min-height:145px;resize:vertical;line-height:1.55}
+button,.btn{font:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border:1px solid rgba(22,208,255,.28);border-radius:12px;background:var(--cyan);color:#02101c;text-decoration:none;font-size:13px;font-weight:850;cursor:pointer;box-shadow:0 10px 28px rgba(0,208,255,.12)}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.controls .btn{flex:1;min-width:110px}
+.back-wrap{text-align:center;margin:30px 0 0}
+footer{text-align:center;padding:55px 20px 38px;font-size:12px;color:#71839e}
+.status{margin:15px 0;padding:13px 14px;border-radius:12px;background:rgba(4,16,39,.7);border:1px solid var(--line);color:#9eb1ca;font-size:13px}
+@media(max-width:768px){
+ .navbar{height:64px}.nav-container{width:calc(100% - 22px)}
+ .hamburger{display:flex}
+ .nav-links{display:none;position:absolute;top:70px;left:0;right:0;padding:10px;background:rgba(3,10,29,.98);border:1px solid rgba(22,208,255,.24);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.45);flex-direction:column;align-items:stretch;gap:0}
+ .nav-links.active{display:flex}.nav-links a{padding:14px;border-bottom:1px solid rgba(55,190,255,.08)}.nav-links a:last-child{border:0}
+ .brand-name{font-size:21px}.brand-mark{width:28px;height:28px}
+ .content,.container{width:calc(100% - 20px)}
+ .hero{padding:48px 4px 30px}.hero h1{font-size:clamp(31px,9.5vw,46px);letter-spacing:-1px}.hero p{font-size:14px}
+ .checker-box{padding:18px;border-radius:18px}
+ .btn{width:100%}.controls .btn{width:auto}
+}
+</style>
+</head><body>
+<div id="particles-js"></div>
+<nav class="navbar">
+ <div class="nav-container">
+  <div class="nav-brand"><a href="../index.html" aria-label="HeetDevLab Home">
+   <span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span>
+  </a></div>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-expanded="false" aria-label="Open menu">
+   <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+   <a href="../index.html">Home</a><a href="../index.html#tools">WebTools</a><a href="../Sentinex/">Sentinex</a><a href="../Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+  </div>
+ </div>
+</nav>
 
-<link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="../css/hash-generator.css">
-</head>
-
-<body>
-  <div id="particles.js"></div>
-<div class="content">
-
-<section class="hero">
-<h1>🧪 Advanced Hash Compare</h1>
-<p>Verify file integrity & detect algorithm type.</p>
-</section>
-
+<main class="content">
+<section class="hero"><h1>🧪 Advanced Hash Compare</h1><p>Compare two hashes and check likely algorithm type.</p></section>
 <section class="checker-box">
-
-<textarea id="hash1" placeholder="Paste original hash..."></textarea>
-<textarea id="hash2" placeholder="Paste downloaded file hash..."></textarea>
-
-<div class="compare-result" id="compareResult">
-Status: Waiting...
-</div>
-
-<div class="algo-info" id="algoInfo">
-Algorithm: -
-</div>
-
-<div class="metrics">
-<span id="lengthInfo">Length: -</span>
-</div>
-
-<div style="display:flex; gap:10px;">
-<button class="btn small-btn" onclick="copyHash('hash1')">Copy 1</button>
-<button class="btn small-btn" onclick="copyHash('hash2')">Copy 2</button>
-</div>
-
-<button class="btn" onclick="clearCompare()">Clear</button>
-
+ <textarea id="hash1" placeholder="Paste original hash..."></textarea>
+ <textarea id="hash2" placeholder="Paste downloaded file hash..." style="margin-top:12px"></textarea>
+ <div class="status" id="compareResult">Status: Waiting...</div>
+ <div class="status" id="algoInfo">Algorithm: -</div>
+ <div class="status" id="lengthInfo">Length: -</div>
+ <div class="controls"><button class="btn" onclick="copyHash('hash1')">Copy 1</button><button class="btn" onclick="copyHash('hash2')">Copy 2</button><button class="btn" onclick="clearCompare()">Clear</button></div>
 </section>
-
-<div style="text-align:center; margin-top:30px;">
-<a href="../index.html" class="btn">← Back to Tools</a>
-
-</div>
-
-
-<footer style="text-align:center; padding:40px 20px; font-size:0.8rem; color:#888;">
-    <p>© 2026 HeetDevLab • Privacy First • Indie Built</p>
-</footer>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="../particles-config.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>-->
-
+<div class="back-wrap"><a href="../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+</main>
 
 <script src="../js/hash-compare.js"></script>
+<script>
+(function(){
+ const a=document.getElementById('hash1'),b=document.getElementById('hash2');
+ function compare(){
+  const x=a.value.trim().toLowerCase(),y=b.value.trim().toLowerCase();
+  document.getElementById('compareResult').textContent=!x&&!y?'Status: Waiting...':x&&y?(x===y?'Status: ✓ Hashes match':'Status: ✕ Hashes do not match'):'Status: Enter both hashes';
+  const len=x.length||y.length; document.getElementById('lengthInfo').textContent='Length: '+(len||'-');
+  const map={32:'Likely MD5',40:'Likely SHA-1',56:'Likely SHA-224',64:'Likely SHA-256',96:'Likely SHA-384',128:'Likely SHA-512'};
+  document.getElementById('algoInfo').textContent='Algorithm: '+(map[len]||'-');
+ }
+ a.addEventListener('input',compare);b.addEventListener('input',compare);
+ window.copyHash=window.copyHash||function(id){navigator.clipboard.writeText(document.getElementById(id).value||'')};
+ window.clearCompare=window.clearCompare||function(){a.value='';b.value='';compare()};
+})();
+</script>
 
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="../particles-config.js"></script>
+<script>
+(function(){
+ const h=document.getElementById('hamburger'), n=document.getElementById('navLinks');
+ if(!h||!n)return;
+ const toggle=()=>{const open=!h.classList.contains('active');h.classList.toggle('active',open);n.classList.toggle('active',open);h.setAttribute('aria-expanded',open);h.setAttribute('aria-label',open?'Close menu':'Open menu');};
+ h.addEventListener('click',toggle);
+ h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+ n.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{h.classList.remove('active');n.classList.remove('active');}));
+})();
+</script>
+
+</body></html>
