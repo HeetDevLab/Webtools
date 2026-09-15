@@ -2,70 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>JWT Decoder | HeetDevLab</title>
+<meta name="description" content="Decode and inspect JSON Web Tokens locally in your browser with HeetDevLab.">
+<meta name="theme-color" content="#03091d">
+<link rel="icon" href="../favicon.png">
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="../css/hash-generator.css">
-
+<style>
+:root{--bg:#03091d;--panel:#081735;--panel2:#0b2045;--text:#edf6ff;--muted:#91a4c0;--cyan:#16d0ff;--line:rgba(55,190,255,.18);--danger:#ff667a;--green:#4dffae}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 15% 10%,rgba(0,122,255,.22),transparent 34%),radial-gradient(circle at 85% 40%,rgba(20,65,255,.15),transparent 42%),linear-gradient(180deg,#061332,#03091d 72%)}
+#particles-js{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.4}
+a{color:inherit}.content{width:min(900px,calc(100% - 28px));margin:auto;padding-bottom:30px}
+.navbar{height:72px;border-bottom:1px solid var(--line);background:rgba(3,9,29,.88);backdrop-filter:blur(16px);position:sticky;top:0;z-index:1000}
+.nav-container{width:min(1180px,calc(100% - 28px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;position:relative}
+.nav-brand a{text-decoration:none;display:flex;align-items:center;gap:9px}
+.brand-mark{width:30px;height:30px;border:1px solid rgba(24,215,232,.38);border-radius:9px;display:grid;place-items:center;color:#18d7e8;font:800 11px ui-monospace,monospace;background:rgba(24,215,232,.08)}
+.brand-name{font-size:23px;font-weight:800;letter-spacing:-1.1px}.brand-name span,.brand-name b{color:var(--cyan)}.brand-name b{font-weight:900}
+.nav-links{display:flex;align-items:center;gap:23px}.nav-links a{text-decoration:none;color:#aebed3;font-size:13px;font-weight:650}.nav-links a:hover{color:#fff}
+.hamburger{display:none;width:38px;height:38px;position:relative;cursor:pointer}.hamburger span{position:absolute;left:6px;width:26px;height:3px;background:#fff;border-radius:9px;transition:.25s}.hamburger span:nth-child(1){top:9px}.hamburger span:nth-child(2){top:17px}.hamburger span:nth-child(3){top:25px}.hamburger.active span:nth-child(1){top:17px;transform:rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){top:17px;transform:rotate(-45deg)}
+.hero{text-align:center;padding:64px 8px 34px}.eyebrow{font-size:10px;font-weight:850;letter-spacing:2px;color:#83a0c7;margin-bottom:13px}.hero h1{margin:0;font-size:clamp(38px,7vw,64px);line-height:1.05;letter-spacing:-2px}.hero h1 span{color:var(--cyan)}.hero p{margin:13px auto 0;color:var(--muted);font-size:15px;line-height:1.6}
+.checker-box{padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(13,39,79,.78),rgba(6,18,43,.9));box-shadow:0 20px 60px rgba(0,0,0,.16)}
+label{display:block;color:#b9c9dd;font-size:12px;font-weight:700;margin:18px 0 8px}
+textarea,input{width:100%;border:1px solid rgba(55,190,255,.2);outline:none;border-radius:13px;background:rgba(2,10,27,.72);color:#edf6ff;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;padding:14px;transition:.2s}
+textarea:focus,input:focus{border-color:rgba(22,208,255,.65);box-shadow:0 0 0 3px rgba(22,208,255,.08)}
+#jwtInput{min-height:150px;resize:vertical}#headerOutput,#payloadOutput{min-height:135px;resize:vertical}
+.btn{border:0;border-radius:12px;padding:12px 17px;background:var(--cyan);color:#02101c;font-size:13px;font-weight:850;cursor:pointer;box-shadow:0 10px 28px rgba(0,208,255,.16);margin-top:14px}.btn:hover{filter:brightness(1.08)}.small-btn{padding:9px 13px;margin:8px 6px 0 0}
+.jwt-status{margin-top:18px;padding:12px 14px;border-radius:12px;background:rgba(2,10,27,.62);border:1px solid var(--line);color:#a9bbd3;font-size:12px}
+.jwt-status.ok{color:var(--green);border-color:rgba(77,255,174,.25)}.jwt-status.error{color:#ff8796;border-color:rgba(255,102,122,.3)}
+.metrics{margin-top:14px;padding:14px;border-radius:12px;background:rgba(2,10,27,.5);color:#a9bbd3;font-size:12px}
+.actions{display:flex;flex-wrap:wrap;gap:6px}
+.back{text-align:center;margin:28px 0}footer{text-align:center;padding:42px 20px;color:#667892;font-size:11px;border-top:1px solid var(--line)}
+@media(max-width:768px){.navbar{height:64px}.hamburger{display:block}.nav-links{display:none;position:absolute;top:57px;left:0;right:0;padding:10px;background:rgba(3,10,29,.98);border:1px solid var(--line);border-radius:15px;flex-direction:column;align-items:stretch;gap:0;box-shadow:0 18px 45px rgba(0,0,0,.45)}.nav-links.open{display:flex}.nav-links a{padding:13px;border-bottom:1px solid rgba(55,190,255,.08)}.nav-links a:last-child{border:0}.content{width:calc(100% - 20px)}.hero{padding:48px 4px 28px}.hero h1{font-size:clamp(34px,10vw,48px);letter-spacing:-1.2px}.hero p{font-size:14px}.checker-box{padding:18px 14px;border-radius:18px}textarea,input{font-size:13px}.actions{display:grid;grid-template-columns:1fr 1fr}.actions .btn{width:100%}.actions .btn:first-child{grid-column:1/-1}}
+</style>
 </head>
-
 <body>
-  <div id="particles.js"></script>
-<div class="content">
-
+<div id="particles-js"></div>
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand"><a href="../index.html" aria-label="HeetDevLab Home"><span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span></a></div>
+    <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a><a href="../index.html#tools">WebTools</a><a href="../../Sentinex/">Sentinex</a><a href="../../Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </div>
+</nav>
+<main class="content">
 <section class="hero">
-<h1>🧬 JWT Decoder</h1>
-<p>Decode & inspect JSON Web Tokens securely.</p>
+  <div class="eyebrow">HEETDEVLAB / WEBTOOLS</div>
+  <h1>🧬 JWT <span>Decoder</span></h1>
+  <p>Decode and inspect JSON Web Tokens securely in your browser.</p>
 </section>
-
 <section class="checker-box">
+  <label for="jwtInput">JSON Web Token</label>
+  <textarea id="jwtInput" placeholder="Paste JWT token here..."></textarea>
+  <button class="btn" onclick="decodeJWT()">Decode Token</button>
+  <div class="jwt-status" id="jwtStatus">Status: Waiting...</div>
 
-<textarea id="jwtInput" placeholder="Paste JWT token here..."></textarea>
+  <label for="headerOutput">Header</label>
+  <textarea id="headerOutput" readonly placeholder="Decoded header will appear here..."></textarea>
 
-<button class="btn primary-btn" onclick="decodeJWT()">Decode Token</button>
+  <label for="payloadOutput">Payload</label>
+  <textarea id="payloadOutput" readonly placeholder="Decoded payload will appear here..."></textarea>
 
-<div class="jwt-status" id="jwtStatus">
-Status: Waiting...
-</div>
+  <div class="jwt-status" id="verifyResult">Verification: Signature not verified by this decoder.</div>
+  <div class="metrics"><span id="expiryInfo">Expiry: -</span></div>
 
-<h3>Header</h3>
-<textarea id="headerOutput" readonly></textarea>
-
-<h3>Payload</h3>
-<textarea id="payloadOutput" readonly></textarea>
-
-
-<div id="verifyResult" class="jwt-status">
-Verification: -
-</div>
-
-<div class="metrics">
-<span id="expiryInfo">Expiry: -</span>
-</div>
-
-<button class="btn small-btn" onclick="copyOutput('headerOutput')">Copy Header</button>
-
-<button class="btn small-btn" onclick="copyOutput('payloadOutput')">Copy Payload</button>
-
-<button class="btn" onclick="clearJWT()">Clear</button>
-
+  <div class="actions">
+    <button class="btn small-btn" onclick="copyOutput('headerOutput')">Copy Header</button>
+    <button class="btn small-btn" onclick="copyOutput('payloadOutput')">Copy Payload</button>
+    <button class="btn small-btn" onclick="clearJWT()">Clear</button>
+  </div>
 </section>
-
-<div style="text-align:center; margin-top:30px;"><a href="../index.html" class="btn">← Back to Tools</a>
-
-</div>
-
-<footer style="text-align:center; padding:40px 20px; font-size:0.8rem; color:#888;">
-    <p>© 2026 HeetDevLab • Privacy First • Indie Built</p>
-</footer>
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script src="../js/jwt.js"></script>
-<script src="../particles-config.js"></script>
-
+<div class="back"><a href="../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+</main>
+<script>
+const b64=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(atob(s).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))};
+function decodeJWT(){
+ const token=document.getElementById('jwtInput').value.trim(),status=document.getElementById('jwtStatus'),head=document.getElementById('headerOutput'),pay=document.getElementById('payloadOutput'),exp=document.getElementById('expiryInfo');
+ try{
+  const p=token.split('.');if(p.length!==3)throw new Error('A JWT must contain three parts.');
+  const h=JSON.parse(b64(p[0])),pl=JSON.parse(b64(p[1]));
+  head.value=JSON.stringify(h,null,2);pay.value=JSON.stringify(pl,null,2);
+  status.textContent='Status: Valid JWT structure decoded.';status.className='jwt-status ok';
+  if(pl.exp){const d=new Date(pl.exp*1000);exp.textContent='Expiry: '+d.toLocaleString()+(d.getTime()<Date.now()?' — Expired':' — Active')}else exp.textContent='Expiry: Not specified';
+ }catch(e){head.value='';pay.value='';exp.textContent='Expiry: -';status.textContent='Status: '+e.message;status.className='jwt-status error'}
+}
+function copyOutput(id){const v=document.getElementById(id).value;if(v)navigator.clipboard.writeText(v)}
+function clearJWT(){document.getElementById('jwtInput').value='';document.getElementById('headerOutput').value='';document.getElementById('payloadOutput').value='';document.getElementById('jwtStatus').textContent='Status: Waiting...';document.getElementById('jwtStatus').className='jwt-status';document.getElementById('expiryInfo').textContent='Expiry: -'}
+(function(){const h=document.getElementById('hamburger'),n=document.getElementById('navLinks');function toggle(){const o=n.classList.toggle('open');h.classList.toggle('active',o);h.setAttribute('aria-expanded',o);h.setAttribute('aria-label',o?'Close menu':'Open menu')}h.onclick=toggle;h.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')toggle()};n.querySelectorAll('a').forEach(a=>a.onclick=()=>n.classList.remove('open'))})();
+if(window.particlesJS)particlesJS('particles-js',{particles:{number:{value:42,density:{enable:true,value_area:900}},color:{value:'#168cff'},shape:{type:'circle'},opacity:{value:.25},size:{value:2},line_linked:{enable:true,distance:145,color:'#168cff',opacity:.16,width:1},move:{enable:true,speed:.6}},interactivity:{events:{onhover:{enable:false}}}});
+</script>
 </body>
 </html>
