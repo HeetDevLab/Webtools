@@ -130,3 +130,45 @@ body{position:relative}
   .nav-wrap,.shell,.footer-inner{width:calc(100% - 40px)}
   .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+
+/* Hard viewport correction: the document was inheriting a narrower layout
+   canvas on some Android browser configurations. Anchor top-level blocks to
+   the actual layout viewport, then center the inner content shell. */
+html {
+  width: 100%;
+  min-width: 100%;
+  overflow-x: clip;
+}
+body {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  overflow-x: clip;
+}
+.site-header,
+main,
+.site-footer {
+  width: 100vw !important;
+  min-width: 100vw !important;
+  max-width: 100vw !important;
+}
+.nav-wrap,
+.shell,
+.footer-inner {
+  width: min(1160px, calc(100vw - 48px));
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 700px) {
+  .nav-wrap,
+  .shell,
+  .footer-inner {
+    width: calc(100vw - 32px);
+  }
+  .tools-section,
+  .about-section {
+    width: 100vw;
+  }
+}
