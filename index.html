@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080d1c">
-  <meta name="description" content="A practical collection of free browser-based tools for passwords, PINs, JWTs, hashes and private notes. Built by HeetDevLab.">
+  <meta name="description" content="Free, practical browser tools for passwords, PINs, JWTs, hashes and notes. Built by HeetDevLab.">
   <meta name="robots" content="index,follow">
-  <title>WebTools — Simple tools. Clear answers. | HeetDevLab</title>
+  <title>WebTools — Your everyday digital toolkit | HeetDevLab</title>
   <link rel="icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,106 +15,65 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="site-header">
     <nav class="nav-wrap" aria-label="Main navigation">
-      <a class="brand" href="./" aria-label="WebTools home">
-        <span class="brand-symbol">&lt;/&gt;</span>
-        <span>Web<span class="brand-accent">Tools</span><small>BY HEETDEVLAB</small></span>
-      </a>
+      <a class="brand" href="./" aria-label="WebTools home"><span class="brand-symbol">&lt;/&gt;</span><span>Web<span class="brand-accent">Tools</span><small>BY HEETDEVLAB</small></span></a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
-      <div class="nav-links" id="navLinks">
-        <a class="active" href="#tools">Tools</a>
-        <a href="#about">About</a>
-        <a href="https://heetdevlab.github.io/" target="_blank" rel="noopener">HeetDevLab ↗</a>
-      </div>
+      <div class="nav-links" id="navLinks"><a class="active" href="#tools">Tools</a><a href="#about">About</a><a href="https://heetdevlab.github.io/" target="_blank" rel="noopener">HeetDevLab ↗</a></div>
     </nav>
   </header>
-
   <main>
     <section class="hero shell">
       <div class="hero-copy reveal">
         <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR EVERYDAY DIGITAL TOOLKIT</div>
-        <h1>Small tools.<br><span>Big time-savers.</span></h1>
-        <p class="hero-description">Useful, straightforward utilities for everyday digital tasks. No clutter, no complicated setup — just open a tool and get things done.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#tools">Explore the tools <span aria-hidden="true">↘</span></a>
-          <span class="hero-note"><span class="lock-icon">⌑</span> Browser-based utilities</span>
-        </div>
+        <h1>Less searching.<br><span>More doing.</span></h1>
+        <p class="hero-description">A focused collection of useful browser tools for passwords, developer tasks and everyday digital work. Find what you need and get straight to it.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#tools">Explore all tools <span aria-hidden="true">↘</span></a><span class="hero-note"><span class="lock-icon">⌑</span> Simple browser-based utilities</span></div>
         <div class="hero-meta"><span>MADE FOR THE WEB</span><i></i><span>BUILT BY HEETDEVLAB</span></div>
       </div>
       <div class="hero-art reveal" aria-label="Abstract illustration of a digital toolkit">
         <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
-        <div class="art-card art-card-main">
-          <div class="art-window"><b></b><b></b><b></b><span>toolkit / ready</span></div>
-          <div class="art-code"><span class="code-muted">01</span> <span class="code-blue">const</span> toolkit = <span class="code-green">[</span><br>
-            <span class="code-muted">02</span> &nbsp; "passwords",<br>
-            <span class="code-muted">03</span> &nbsp; "hashes",<br>
-            <span class="code-muted">04</span> &nbsp; "tokens"<br>
-            <span class="code-muted">05</span> <span class="code-green">]</span><span class="code-cursor"></span>
-          </div>
+        <div class="art-card art-card-main"><div class="art-window"><b></b><b></b><b></b><span>toolkit / ready</span></div>
+          <div class="art-code"><span class="code-muted">01</span> <span class="code-blue">const</span> toolkit = <span class="code-green">[</span><br><span class="code-muted">02</span> &nbsp; "security",<br><span class="code-muted">03</span> &nbsp; "developer",<br><span class="code-muted">04</span> &nbsp; "productivity"<br><span class="code-muted">05</span> <span class="code-green">]</span><span class="code-cursor"></span></div>
           <div class="art-status"><span></span> READY WHEN YOU ARE</div>
         </div>
-        <div class="float-chip chip-lock">⌑ <span>Privacy-minded</span></div>
-        <div class="float-chip chip-bolt">✳ <span>Quick &amp; simple</span></div>
-        <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
+        <div class="float-chip chip-lock">⌑ <span>Privacy-minded</span></div><div class="float-chip chip-bolt">✳ <span>Quick &amp; simple</span></div><div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
       </div>
-      <div class="hero-bottom"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span>01 — 08</span></div>
+      <div class="hero-bottom"><span>SCROLL TO EXPLORE</span><span class="scroll-line"></span><span>08 TOOLS / 02 GROUPS</span></div>
     </section>
 
     <section class="tools-section shell" id="tools">
-      <div class="section-heading reveal">
-        <div><div class="eyebrow">THE TOOLBOX / 01</div><h2>Find your <span>tool.</span></h2><p>Pick a utility and get straight to work.</p></div>
-        <div class="tool-total"><strong id="toolCount">08</strong><span>TOOLS AVAILABLE</span></div>
-      </div>
+      <div class="section-heading reveal"><div><div class="eyebrow">THE TOOLBOX / 01</div><h2>Tools, <span>in their place.</span></h2><p>Organised by what you want to get done.</p></div><div class="tool-total"><strong id="toolCount">08</strong><span>TOOLS MATCHED</span></div></div>
       <div class="tool-controls reveal">
         <label class="search-box"><span aria-hidden="true">⌕</span><input id="toolSearch" type="search" placeholder="Search tools..." autocomplete="off" aria-label="Search tools"><kbd>/</kbd></label>
-        <div class="filter-list" role="group" aria-label="Filter tools">
-          <button class="filter active" data-filter="all" aria-pressed="true">All tools</button>
-          <button class="filter" data-filter="passwords" aria-pressed="false">Passwords</button>
-          <button class="filter" data-filter="tokens" aria-pressed="false">Tokens</button>
-          <button class="filter" data-filter="data" aria-pressed="false">Data &amp; notes</button>
+        <div class="filter-list" role="group" aria-label="Filter tool groups"><button class="filter active" data-filter="all" aria-pressed="true">All tools</button><button class="filter" data-filter="security" aria-pressed="false">Security &amp; access</button><button class="filter" data-filter="developer" aria-pressed="false">Developer tools</button></div>
+      </div>
+
+      <section class="tool-group" data-group="security" aria-labelledby="securityHeading">
+        <div class="group-heading reveal"><div><span class="group-index">GROUP 01</span><h3 id="securityHeading">Security <span>&amp; access</span></h3><p>Credentials, quick checks and private notes.</p></div><span class="group-count">04 TOOLS</span></div>
+        <div class="tool-grid">
+          <a class="tool-card reveal" href="tools/password-generator/" data-category="security" data-search="password generator secure random customizable credentials"><div class="card-top"><span class="tool-icon icon-violet">✳</span><span class="card-number">01</span></div><div class="card-content"><span class="card-category">PASSWORDS</span><h3>Password Generator</h3><p>Create strong passwords with options to customize length and character types.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/password-checker/" data-category="security" data-search="password strength checker security strength analyze"><div class="card-top"><span class="tool-icon icon-coral">⌁</span><span class="card-number">02</span></div><div class="card-content"><span class="card-category">PASSWORDS</span><h3>Password Strength Checker</h3><p>Review password strength and see practical suggestions for improvement.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/pin-generator/" data-category="security" data-search="pin generator random numeric code"><div class="card-top"><span class="tool-icon icon-mint">▦</span><span class="card-number">03</span></div><div class="card-content"><span class="card-category">ACCESS CODES</span><h3>PIN Generator</h3><p>Generate random numeric PINs for devices, accounts and other uses.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/secure-notes/" data-category="security" data-search="secure notes private notes local browser save"><div class="card-top"><span class="tool-icon icon-mint">▤</span><span class="card-number">04</span></div><div class="card-content"><span class="card-category">PRIVATE NOTES</span><h3>Secure Notes</h3><p>Write and manage notes in your browser. Check storage guidance before saving sensitive information.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
         </div>
-      </div>
-      <div class="tool-grid" id="toolGrid">
-        <a class="tool-card reveal" href="tools/password-generator/" data-category="passwords" data-search="password generator secure random customizable credentials">
-          <div class="card-top"><span class="tool-icon icon-violet">✳</span><span class="card-number">01</span></div><div class="card-content"><span class="card-category">PASSWORDS</span><h3>Password Generator</h3><p>Create strong passwords with options to customize length and character types.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/password-checker/" data-category="passwords" data-search="password strength checker security strength analyze">
-          <div class="card-top"><span class="tool-icon icon-coral">⌁</span><span class="card-number">02</span></div><div class="card-content"><span class="card-category">PASSWORDS</span><h3>Password Strength Checker</h3><p>Review password strength and see practical suggestions for improvement.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/pin-generator/" data-category="passwords" data-search="pin generator random numeric code">
-          <div class="card-top"><span class="tool-icon icon-mint">▦</span><span class="card-number">03</span></div><div class="card-content"><span class="card-category">PASSWORDS</span><h3>PIN Generator</h3><p>Generate random numeric PINs for devices, accounts and other uses.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/jwt-decoder/" data-category="tokens" data-search="jwt decoder json web token inspect decode header payload">
-          <div class="card-top"><span class="tool-icon icon-blue">⌘</span><span class="card-number">04</span></div><div class="card-content"><span class="card-category">TOKENS</span><h3>JWT Decoder</h3><p>Decode a JSON Web Token and inspect its header and payload.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/jwt-generator/" data-category="tokens" data-search="jwt generator json web token create sign">
-          <div class="card-top"><span class="tool-icon icon-blue">⌗</span><span class="card-number">05</span></div><div class="card-content"><span class="card-category">TOKENS</span><h3>JWT Generator</h3><p>Create JSON Web Tokens with configurable claims and signing options.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/hash-generator/" data-category="data" data-search="hash generator sha digest checksum text file">
-          <div class="card-top"><span class="tool-icon icon-amber">⠿</span><span class="card-number">06</span></div><div class="card-content"><span class="card-category">DATA &amp; NOTES</span><h3>Hash Generator</h3><p>Generate supported cryptographic hashes from your input.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/hash-compare/" data-category="data" data-search="hash compare verify checksum file integrity">
-          <div class="card-top"><span class="tool-icon icon-amber">⇄</span><span class="card-number">07</span></div><div class="card-content"><span class="card-category">DATA &amp; NOTES</span><h3>Hash Compare</h3><p>Compare hash values to help verify data and file integrity.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-        <a class="tool-card reveal" href="tools/secure-notes/" data-category="data" data-search="secure notes private notes local browser save">
-          <div class="card-top"><span class="tool-icon icon-mint">▤</span><span class="card-number">08</span></div><div class="card-content"><span class="card-category">DATA &amp; NOTES</span><h3>Secure Notes</h3><p>Write and manage notes in your browser. Review the tool's storage guidance before saving sensitive information.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div>
-        </a>
-      </div>
-      <div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>No matching tools</h3><p>Try another search or choose a different category.</p><button id="clearFilters" class="text-button">Clear filters</button></div>
+      </section>
+
+      <section class="tool-group" data-group="developer" aria-labelledby="developerHeading">
+        <div class="group-heading reveal"><div><span class="group-index">GROUP 02</span><h3 id="developerHeading">Developer <span>toolkit</span></h3><p>Inspect tokens, generate hashes and compare values.</p></div><span class="group-count">04 TOOLS</span></div>
+        <div class="tool-grid">
+          <a class="tool-card reveal" href="tools/jwt-decoder/" data-category="developer" data-search="jwt decoder json web token inspect decode header payload"><div class="card-top"><span class="tool-icon icon-blue">⌘</span><span class="card-number">05</span></div><div class="card-content"><span class="card-category">JSON WEB TOKENS</span><h3>JWT Decoder</h3><p>Decode a JSON Web Token and inspect its header and payload.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/jwt-generator/" data-category="developer" data-search="jwt generator json web token create sign"><div class="card-top"><span class="tool-icon icon-blue">⌗</span><span class="card-number">06</span></div><div class="card-content"><span class="card-category">JSON WEB TOKENS</span><h3>JWT Generator</h3><p>Create JSON Web Tokens with configurable claims and signing options.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/hash-generator/" data-category="developer" data-search="hash generator sha digest checksum text file"><div class="card-top"><span class="tool-icon icon-amber">⠿</span><span class="card-number">07</span></div><div class="card-content"><span class="card-category">HASHING</span><h3>Hash Generator</h3><p>Generate supported cryptographic hashes from your input.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+          <a class="tool-card reveal" href="tools/hash-compare/" data-category="developer" data-search="hash compare verify checksum file integrity"><div class="card-top"><span class="tool-icon icon-amber">⇄</span><span class="card-number">08</span></div><div class="card-content"><span class="card-category">HASHING</span><h3>Hash Compare</h3><p>Compare hash values to help verify data and file integrity.</p></div><div class="card-bottom"><span>Open tool</span><b>↗</b></div></a>
+        </div>
+      </section>
+      <div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>No matching tools</h3><p>Try another search or choose a different group.</p><button id="clearFilters" class="text-button">Clear filters</button></div>
     </section>
 
-    <section class="about-section shell" id="about">
-      <div class="about-panel reveal">
-        <div class="about-mark">H<span>.</span></div>
-        <div class="about-copy"><div class="eyebrow">A SMALL PROJECT BY HEETDEVLAB</div><h2>Made to be <span>useful.</span></h2><p>WebTools is a growing collection of practical browser utilities. The goal is simple: make everyday digital tasks easier with clear interfaces and tools that get out of your way.</p><a href="https://heetdevlab.github.io/" target="_blank" rel="noopener" class="about-link">More about HeetDevLab <span>↗</span></a></div>
-        <div class="about-decoration" aria-hidden="true">TOOLS<br>FOR<br>EVERYDAY<span>.</span></div>
-      </div>
-    </section>
+    <section class="about-section shell" id="about"><div class="about-panel reveal"><div class="about-mark">H<span>.</span></div><div class="about-copy"><div class="eyebrow">A SMALL PROJECT BY HEETDEVLAB</div><h2>Made to be <span>useful.</span></h2><p>WebTools is a growing collection of practical browser utilities. The goal is simple: make everyday digital tasks easier with clear interfaces and tools that get out of your way.</p><a href="https://heetdevlab.github.io/" target="_blank" rel="noopener" class="about-link">More about HeetDevLab <span>↗</span></a></div><div class="about-decoration" aria-hidden="true">TOOLS<br>FOR<br>EVERYDAY<span>.</span></div></div></section>
   </main>
-
   <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="./">WebTools<span>.</span></a><span>© 2026 HeetDevLab. Built with care.</span><a href="#tools">Back to tools ↑</a></div></footer>
   <script src="script.js" defer></script>
 </body>
