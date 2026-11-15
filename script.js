@@ -1,2 +1,109 @@
-const menu=document.getElementById('menu'),links=document.getElementById('links');menu?.addEventListener('click',()=>links.classList.toggle('open'));links?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-if(window.particlesJS){particlesJS('particles-js',{particles:{number:{value:42,density:{enable:true,value_area:850}},color:{value:'#168dff'},opacity:{value:.3,random:true},size:{value:2,random:true},line_linked:{enable:true,distance:140,color:'#168dff',opacity:.14,width:1},move:{enable:true,speed:.65,direction:'none',out_mode:'out'}},interactivity:{detect_on:'canvas',events:{onhover:{enable:false},onclick:{enable:false}}},retina_detect:true});}
+(() => {
+  "use strict";
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  const searchInput = document.getElementById("toolSearch");
+  const cards = Array.from(document.querySelectorAll(".tool-card"));
+  const filters = Array.from(document.querySelectorAll(".filter"));
+  const count = document.getElementById("toolCount");
+  const emptyState = document.getElementById("emptyState");
+  const clearButton = document.getElementById("clearFilters");
+  let activeFilter = "all";
+
+  function closeMenu() {
+    if (!menuToggle || !navLinks) return;
+    menuToggle.classList.remove("active");
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+  }
+
+  menuToggle?.addEventListener("click", () => {
+    const open = menuToggle.getAttribute("aria-expanded") !== "true";
+    menuToggle.classList.toggle("active", open);
+    navLinks?.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  });
+
+  navLinks?.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", event => {
+    if (navLinks?.classList.contains("open") &&
+        !navLinks.contains(event.target) &&
+        !menuToggle?.contains(event.target)) closeMenu();
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) closeMenu();
+  });
+
+  function applyFilters() {
+    const query = (searchInput?.value || "").trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const matchesCategory = activeFilter === "all" || card.dataset.category === activeFilter;
+      const haystack = (card.dataset.search + " " + card.innerText).toLowerCase();
+      const matchesSearch = !query || haystack.includes(query);
+      const show = matchesCategory && matchesSearch;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    if (count) count.textContent = String(visible).padStart(2, "0");
+    if (emptyState) emptyState.hidden = visible !== 0;
+  }
+
+  filters.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter || "all";
+      filters.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+      applyFilters();
+    });
+  });
+  searchInput?.addEventListener("input", applyFilters);
+  clearButton?.addEventListener("click", () => {
+    if (searchInput) searchInput.value = "";
+    activeFilter = "all";
+    filters.forEach(button => {
+      const selected = button.dataset.filter === "all";
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    applyFilters();
+    searchInput?.focus();
+  });
+
+  document.addEventListener("keydown", event => {
+    const target = event.target;
+    const typing = target instanceof HTMLElement &&
+      (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+    if (event.key === "/" && !typing) {
+      event.preventDefault();
+      searchInput?.focus();
+    }
+    if (event.key === "Escape") {
+      closeMenu();
+      if (document.activeElement === searchInput) searchInput.blur();
+    }
+  });
+
+  const revealItems = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -25px 0px" });
+    revealItems.forEach(item => observer.observe(item));
+  } else {
+    revealItems.forEach(item => item.classList.add("is-visible"));
+  }
+
+  applyFilters();
+})();
