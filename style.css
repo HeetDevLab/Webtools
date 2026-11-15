@@ -109,3 +109,24 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(-
   .group-count{display:none}
   .about-panel{padding:22px 17px}
 }
+
+/* Full-viewport safeguards: prevent the page shell from shrinking or
+   creating a narrow left-aligned canvas on mobile browsers. */
+html,body{width:100%;max-width:100%;min-width:320px}
+body{position:relative}
+.site-header,main,.site-footer{width:100%;max-width:100%;min-width:0}
+.nav-wrap,.shell,.footer-inner{max-width:1160px;min-width:0}
+.hero-copy,.hero-art,.section-heading,.tool-controls,.tool-group,.tool-grid,
+.group-heading,.about-panel,.about-copy{min-width:0}
+.tool-card{min-width:0;overflow-wrap:anywhere}
+@media(max-width:700px){
+  .nav-wrap,.shell,.footer-inner{width:calc(100% - 32px);max-width:100%}
+  .hero{width:calc(100% - 32px);margin-inline:auto}
+  .tools-section,.about-section{width:100%}
+  .tool-grid{grid-template-columns:minmax(0,1fr)}
+  .tool-card{width:100%}
+}
+@media(min-width:701px) and (max-width:900px){
+  .nav-wrap,.shell,.footer-inner{width:calc(100% - 40px)}
+  .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
