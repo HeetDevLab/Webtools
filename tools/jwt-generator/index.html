@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JWT Generator | HeetDevLab</title>
+<meta name="description" content="Create HS256 JSON Web Tokens locally in your browser with HeetDevLab.">
+<meta name="theme-color" content="#03091d">
+<link rel="icon" href="../../../favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+</head>
+<body>
+<div id="particles-js"></div>
+<nav class="navbar">
+ <div class="nav-container">
+  <div class="nav-brand"><a href="../../index.html" aria-label="HeetDevLab Home">
+   <span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span>
+  </a></div>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-expanded="false" aria-label="Open menu">
+   <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+   <a href="/">Home</a><a href="../../index.html#tools">WebTools</a><a href="/Sentinex/">Sentinex</a><a href="/Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+  </div>
+ </div>
+</nav>
+<main class="content">
+<section class="hero"><div class="eyebrow">HEETDEVLAB / WEBTOOLS</div><h1>🧬 JWT <span>Generator</span></h1><p>Create signed HS256 JSON Web Tokens locally in your browser.</p></section>
+<section class="checker-box">
+<label for="payloadInput">Payload (JSON)</label>
+<textarea class="payload" id="payloadInput" placeholder='{
+  "user": "Heet",
+  "role": "admin"
+}'></textarea>
+<label for="expiryInput">Expiry (seconds from now)</label>
+<input type="number" id="expiryInput" placeholder="3600" min="1">
+<label for="secretInput">Secret Key</label>
+<input type="text" id="secretInput" placeholder="Enter secret key">
+<button class="btn" onclick="generateJWT()">Generate Token</button>
+<label for="tokenOutput">Generated Token</label>
+<textarea class="token" id="tokenOutput" readonly placeholder="Generated JWT will appear here..."></textarea>
+<div class="status" id="genStatus">Status: Waiting...</div>
+<button class="btn small-btn" onclick="copyToken()">Copy Token</button>
+<button class="btn small-btn" onclick="clearGenerator()">Clear</button>
+</section>
+<div class="back"><a href="../../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
