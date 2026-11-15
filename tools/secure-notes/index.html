@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head>
+<link rel="stylesheet" href="style.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Secure Notes | HeetDevLab</title>
+
+</head><body>
+<div id="particles-js"></div>
+<nav class="navbar">
+ <div class="nav-container">
+  <div class="nav-brand"><a href="../../index.html" aria-label="HeetDevLab Home">
+   <span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span>
+  </a></div>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-expanded="false" aria-label="Open menu">
+   <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+   <a href="/">Home</a><a href="../../index.html#tools">WebTools</a><a href="/Sentinex/">Sentinex</a><a href="/Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+  </div>
+ </div>
+</nav>
+
+<main class="content">
+<section class="hero"><h1>🔐 Secure Notes</h1><p>Private notes saved locally in your browser.</p><p>Nothing is sent to a server by this page.</p></section>
+<section class="checker-box">
+ <div style="display:grid;grid-template-columns:220px 1fr;gap:18px" class="notes-grid">
+  <aside style="border:1px solid var(--line);border-radius:15px;padding:16px;background:rgba(3,12,31,.45)">
+   <h3 style="margin:0 0 12px">Your Notes</h3><ul id="notesList" style="list-style:none;padding:0;margin:0"></ul>
+  </aside>
+  <section>
+   <input type="text" id="noteTitle" placeholder="Note title">
+   <input type="password" id="notePassword" placeholder="Password" style="margin-top:10px">
+   <textarea id="noteArea" placeholder="Write your secure note here..." style="margin-top:10px;min-height:260px"></textarea>
+   <div class="controls"><button id="saveBtn" class="btn">Save</button><button id="deleteBtn" class="btn">Delete</button><button id="clearBtn" class="btn">Clear</button></div>
+   <p id="statusMsg" class="status"></p>
+  </section>
+ </div>
+</section>
+<div class="back-wrap"><a href="../../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+
+</main>
+<script src="../../js/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="../../particles-config.js"></script>
+
+
+<script src="script.js"></script>
+</body></html>
