@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#03091d">
+<title>Secure PIN Generator | HeetDevLab</title>
+
+<meta name="description"
+content="Generate secure random PINs instantly in your browser. Privacy-first PIN generator by HeetDevLab.">
+
+
+</head>
+
+
+<body>
+
+<div id="particles-js"></div>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+  <div class="nav-container">
+
+    <div class="nav-brand">
+
+      <a
+        href="../../index.html"
+        aria-label="HeetDevLab Home"
+      >
+
+        <span class="brand-mark">
+          &lt;/&gt;
+        </span>
+
+        <span class="brand-name">
+          Heet<span>Dev</span>Lab<b>.</b>
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- MOBILE MENU BUTTON -->
+
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      type="button"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
+
+    <!-- NAV LINKS -->
+
+    <div
+      class="nav-links"
+      id="navLinks"
+    >
+
+      <a href="/">
+        Home
+      </a>
+
+      <a href="/Sentinex/">
+        Sentinex
+      </a>
+
+      <a href="/Webtools/">
+        WebTools
+      </a>
+
+      <a href="/portfolio/">
+        Portfolio
+      </a>
+
+      <a href="/Blog/">
+        Blog
+      </a>
+
+      <a
+        href="https://youtube.com/@heetplayscode"
+        target="_blank"
+        rel="noopener"
+      >
+        YouTube
+      </a>
+
+    </div>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="page">
+
+<section class="hero">
+
+  <div class="eyebrow">
+    HEETDEVLAB / WEBTOOLS
+  </div>
+
+  <h1>
+    🔢 Secure <span>PIN</span> Generator
+  </h1>
+
+  <p>
+    Generate strong random PINs instantly.
+    <br>
+    Everything happens locally in your browser.
+  </p>
+
+
+  <!-- PIN CARD -->
+
+  <div class="pin-card">
+
+    <input
+      type="text"
+      id="pinOutput"
+      readonly
+      placeholder="Your PIN will appear here"
+    >
+
+
+    <div class="controls">
+
+      <select
+        id="pinLength"
+        aria-label="PIN length"
+      >
+
+        <option value="4">
+          4 Digit PIN
+        </option>
+
+        <option value="6">
+          6 Digit PIN
+        </option>
+
+        <option value="8">
+          8 Digit PIN
+        </option>
+
+      </select>
+
+
+      <button
+        id="generateBtn"
+        class="btn"
+        type="button"
+      >
+        Generate
+      </button>
+
+
+      <button
+        id="copyBtn"
+        class="btn"
+        type="button"
+      >
+        Copy
+      </button>
+
+    </div>
+
+
+    <p
+      class="copy-status"
+      id="copyStatus"
+    ></p>
+
+  </div>
+
+</section>
+
+
+<!-- BACK -->
+
+<div class="back">
+
+  <a
+    href="../../index.html"
+    class="btn"
+  >
+    ← Back to Tools
+  </a>
+
+</div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+  © 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳
+</footer>
+
+
+<!-- =========================
+     PIN GENERATOR
+========================= -->
+
+
+
+
+<!-- =========================
+     PARTICLES
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
