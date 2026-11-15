@@ -1,1 +1,14 @@
-{"name":"HeetDevLab WebTools","short_name":"WebTools","start_url":"/Webtools/","display":"standalone","background_color":"#02091f","theme_color":"#02091f","icons":[]}
+{
+  "name": "HeetDevLab WebTools",
+  "short_name": "WebTools",
+  "description": "A practical collection of browser-based utilities by HeetDevLab.",
+  "start_url": "/Webtools/",
+  "scope": "/Webtools/",
+  "display": "standalone",
+  "background_color": "#080d1c",
+  "theme_color": "#080d1c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
