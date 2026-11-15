@@ -77,6 +77,7 @@
     if(event.key==="Escape"){closeMenu();if(document.activeElement===searchInput)searchInput.blur();}
   });
   const revealItems=document.querySelectorAll(".reveal");
+  document.documentElement.classList.add("motion-ready");
   if("IntersectionObserver"in window&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
     const observer=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("is-visible");observer.unobserve(entry.target);}});
