@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#03091d">
+<title>Advanced Password Generator | HeetDevLab WebTools</title>
+<meta name="description" content="Generate strong passwords locally in your browser with customizable security options. Privacy-first password generator by HeetDevLab.">
+
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="../../index.html" aria-label="HeetDevLab Home">
+        <span class="brand-mark">&lt;/&gt;</span>
+        <span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span>
+      </a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" type="button">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="../../index.html#tools">WebTools</a>
+      <a href="/Sentinex/">Sentinex</a>
+      <a href="/Blog/">Blog</a>
+      <a href="/portfolio/">Portfolio</a>
+      <a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">HEETDEVLAB / PASSWORD SECURITY</div>
+    <h1>Advanced <span>Password Generator</span></h1>
+    <p>Generate strong, customizable passwords instantly — directly in your browser.</p>
+    <p class="privacy">🔒 No password storage &nbsp;•&nbsp; ⚡ Client-side &nbsp;•&nbsp; 🛡 Privacy-first</p>
+  </section>
+
+  <section class="generator">
+    <div class="card-title">
+      <h2>Configure your password</h2>
+      <span class="secure-badge">LOCAL PROCESSING</span>
+    </div>
+
+    <div class="output-wrap">
+      <input type="text" id="passwordOutput" readonly aria-label="Generated password">
+      <button class="btn small-btn copy-btn" onclick="copyPassword()" type="button">Copy</button>
+    </div>
+
+    <div class="controls">
+      <div class="control-card">
+        <h3>Password settings</h3>
+        <div class="range-head">
+          <span>Password Length</span>
+          <span class="range-value"><span id="lengthValue">16</span> chars</span>
+        </div>
+        <input type="range" id="length" min="6" max="32" value="16">
+
+        <div class="options-grid">
+          <label class="check"><input type="checkbox" id="uppercase" checked> Uppercase</label>
+          <label class="check"><input type="checkbox" id="lowercase" checked> Lowercase</label>
+          <label class="check"><input type="checkbox" id="numbers" checked> Numbers</label>
+          <label class="check"><input type="checkbox" id="symbols" checked> Symbols</label>
+          <label class="check"><input type="checkbox" id="excludeSimilar"> Exclude Similar</label>
+          <label class="check"><input type="checkbox" id="avoidRepeat"> Avoid Repeat</label>
+          <label class="check ultra"><input type="checkbox" id="ultraSecure"> Ultra Secure 🔒</label>
+        </div>
+      </div>
+
+      <div class="control-card">
+        <h3>Optional keyword</h3>
+        <input class="seed-input" type="text" id="customSeed" maxlength="20" placeholder="e.g. heet">
+
+        <label class="check toggle">
+          <input type="checkbox" id="mutateSeed"> Auto Mutate Keyword
+        </label>
+
+        <div id="mutationSection">
+          <div class="range-head">
+            <span>Mutation Level</span>
+            <span class="range-value" id="mutationLevelText">Light</span>
+          </div>
+          <input type="range" id="mutationLevel" min="1" max="4" value="1">
+          <p class="preview" id="mutatedPreview"></p>
+          <div class="impact-bar"><div id="impactFill"></div></div>
+          <p id="impactText"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary-btn" onclick="generatePassword()" type="button">⚡ Generate Password</button>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-top"><span>Strength</span><span class="metric-value" id="strengthText">—</span></div>
+        <div class="strength-bar"><div id="strengthFill"></div></div>
+      </div>
+      <div class="metric">
+        <div class="metric-top"><span>Estimated Entropy</span><span class="metric-value" id="entropyText">—</span></div>
+        <div class="strength-bar"><div id="entropyFill"></div></div>
+      </div>
+    </div>
+
+    <p class="crack" id="crackTime">Estimated crack time: —</p>
+
+    <div class="bottom-actions">
+      <button class="btn small-btn" onclick="downloadPassword()" type="button">↓ Download .txt</button>
+      <button class="btn small-btn" onclick="clearHistory()" type="button">Clear History</button>
+    </div>
+
+    <div class="history">
+      <div class="history-head">
+        <h4>Recent Passwords</h4>
+        <span style="font-size:10px;color:#637b99">Last 5</span>
+      </div>
+      <ul id="historyList"></ul>
+      <p class="history-note">History exists only in this page session and is cleared when you leave the page.</p>
+    </div>
+  </section>
+
+  <div class="back">
+    <a href="../../index.html" class="back-btn">← Back to WebTools</a>
+  </div>
+</main>
+
+<footer>
+  <strong>HeetDevLab WebTools</strong> · Privacy First · Indie Built 🇮🇳<br><br>
+  © 2026 HeetDevLab
+</footer>
+
+<div class="toast" id="copyToast">Password copied ✓</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
