@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JWT Decoder | HeetDevLab</title>
+<meta name="description" content="Decode and inspect JSON Web Tokens locally in your browser with HeetDevLab.">
+<meta name="theme-color" content="#03091d">
+<link rel="icon" href="../../../favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+</head>
+<body>
+<div id="particles-js"></div>
+<nav class="navbar">
+ <div class="nav-container">
+  <div class="nav-brand"><a href="../../index.html" aria-label="HeetDevLab Home">
+   <span class="brand-mark">&lt;/&gt;</span><span class="brand-name">Heet<span>Dev</span>Lab<b>.</b></span>
+  </a></div>
+  <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-expanded="false" aria-label="Open menu">
+   <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
+   <a href="/">Home</a><a href="../../index.html#tools">WebTools</a><a href="/Sentinex/">Sentinex</a><a href="/Blog/">Blog</a><a href="https://youtube.com/@heetplayscode" target="_blank" rel="noopener">YouTube</a>
+  </div>
+ </div>
+</nav>
+<main class="content">
+<section class="hero">
+  <div class="eyebrow">HEETDEVLAB / WEBTOOLS</div>
+  <h1>🧬 JWT <span>Decoder</span></h1>
+  <p>Decode and inspect JSON Web Tokens securely in your browser.</p>
+</section>
+<section class="checker-box">
+  <label for="jwtInput">JSON Web Token</label>
+  <textarea id="jwtInput" placeholder="Paste JWT token here..."></textarea>
+  <button class="btn" onclick="decodeJWT()">Decode Token</button>
+  <div class="jwt-status" id="jwtStatus">Status: Waiting...</div>
+
+  <label for="headerOutput">Header</label>
+  <textarea id="headerOutput" readonly placeholder="Decoded header will appear here..."></textarea>
+
+  <label for="payloadOutput">Payload</label>
+  <textarea id="payloadOutput" readonly placeholder="Decoded payload will appear here..."></textarea>
+
+  <div class="jwt-status" id="verifyResult">Verification: Signature not verified by this decoder.</div>
+  <div class="metrics"><span id="expiryInfo">Expiry: -</span></div>
+
+  <div class="actions">
+    <button class="btn small-btn" onclick="copyOutput('headerOutput')">Copy Header</button>
+    <button class="btn small-btn" onclick="copyOutput('payloadOutput')">Copy Payload</button>
+    <button class="btn small-btn" onclick="clearJWT()">Clear</button>
+  </div>
+</section>
+<div class="back"><a href="../../index.html" class="btn">← Back to Tools</a></div>
+<footer>© 2026 HeetDevLab • Privacy First • Indie Built 🇮🇳</footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
