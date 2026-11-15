@@ -71,3 +71,34 @@ footer{line-height:1.7}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Cross-page mobile navigation compatibility.
+   Older tool pages use body.nav-open; newer ones toggle .open or .active. */
+@media(max-width:768px){
+  body.nav-open .nav-links,
+  .nav-links.open,
+  .nav-links.active{display:flex!important}
+  .nav-overlay{position:fixed!important;inset:66px 0 0!important;z-index:999!important}
+  body.nav-open .nav-overlay{display:block!important}
+  .nav-links{z-index:1002!important}
+  .hamburger{position:relative;z-index:1004!important}
+  .notes-grid{grid-template-columns:minmax(0,1fr)!important}
+  .notes-grid aside{order:2}
+  .notes-grid section{order:1;min-width:0}
+  .checker-box,.generator,.pin-card{width:100%;max-width:100%;min-width:0}
+  .checker-box *,.generator *,.pin-card *{min-width:0}
+  .checker-box input,.checker-box textarea,.checker-box select,
+  .generator input,.generator textarea,.generator select,
+  .pin-card input,.pin-card textarea,.pin-card select{max-width:100%}
+  pre,code,.token,.hash-output,.output{overflow-wrap:anywhere;word-break:break-word}
+  .status,.security-note,.preview{overflow-wrap:anywhere}
+  .controls,.actions,.bottom-actions{gap:9px}
+  .controls .btn,.actions .btn,.bottom-actions .btn{max-width:100%}
+}
+@media(max-width:380px){
+  .brand-name{font-size:18px!important;letter-spacing:-.7px}
+  .nav-brand{min-width:0}
+  .nav-container{gap:8px!important}
+  .checker-box,.generator,.pin-card{padding:13px!important}
+  .hero h1{overflow-wrap:anywhere}
+}
