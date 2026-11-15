@@ -1,0 +1,73 @@
+/* Shared responsive shell for every WebTools page.
+   Tool-specific styles stay in each tool folder; this file keeps navigation,
+   page widths, controls and mobile behavior consistent. */
+:root{scroll-padding-top:88px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{min-width:320px;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%}
+button,input,select,textarea{font:inherit}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid #63e5f2!important;outline-offset:3px}
+.navbar{position:sticky!important;top:0;z-index:1000!important}
+.nav-container{position:relative!important;width:min(1180px,calc(100% - 36px))!important;min-width:0}
+.nav-brand{flex:0 0 auto;min-width:0}
+.nav-brand a{white-space:nowrap}
+.brand-name{white-space:nowrap}
+.nav-links{z-index:1002}
+.hamburger{flex:0 0 42px;align-items:center;justify-content:center;border:1px solid rgba(70,190,255,.2);border-radius:12px;background:rgba(8,24,53,.78);color:#fff;cursor:pointer;z-index:1004}
+.nav-overlay{display:none}
+.container,.content,.page{width:min(980px,calc(100% - 36px));max-width:100%;margin-inline:auto}
+main{min-width:0}
+.checker-box,.generator,.pin-card{min-width:0}
+input,select,textarea{max-width:100%;min-width:0}
+textarea{overflow-wrap:anywhere}
+.btn,.back-btn{touch-action:manipulation}
+.controls,.actions,.bottom-actions{flex-wrap:wrap;min-width:0}
+footer{line-height:1.7}
+@media(max-width:900px){
+  .nav-links{gap:8px!important}
+  .nav-links a{padding:9px 10px!important}
+  .hero{padding-top:54px}
+}
+@media(max-width:768px){
+  .navbar{height:66px!important}
+  .nav-container{width:calc(100% - 24px)!important;gap:12px}
+  .hamburger{display:flex!important;width:42px;height:42px;padding:0}
+  .nav-links{display:none!important;position:absolute!important;top:calc(100% + 9px)!important;left:0!important;right:0!important;width:100%;padding:9px!important;flex-direction:column!important;align-items:stretch!important;gap:3px!important;border:1px solid rgba(70,190,255,.22)!important;border-radius:16px!important;background:rgba(4,13,33,.98)!important;box-shadow:0 22px 55px rgba(0,0,0,.48)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .nav-links.open,.nav-links.active{display:flex!important}
+  .nav-links a{display:flex;align-items:center;min-height:44px;padding:11px 13px!important;border-radius:10px;font-size:14px!important}
+  .nav-links a:hover,.nav-links a:focus-visible{background:rgba(24,215,232,.09)}
+  .nav-overlay{display:none;position:fixed;inset:66px 0 0;z-index:999;background:rgba(0,0,0,.28)}
+  body.nav-open .nav-overlay{display:block}
+  .container,.content,.page{width:calc(100% - 24px)!important}
+  .hero{padding:46px 4px 28px!important}
+  .hero h1{font-size:clamp(32px,8.5vw,48px)!important;line-height:1.08;letter-spacing:-1.2px!important;overflow-wrap:anywhere}
+  .hero p{font-size:14px;max-width:620px}
+  .checker-box,.generator,.pin-card{padding:clamp(15px,4vw,21px)!important;border-radius:18px!important}
+  .controls{gap:10px}
+  .controls .btn{min-width:0}
+  .tips{grid-template-columns:1fr!important}
+  .metrics{grid-template-columns:1fr!important}
+  .output-wrap{gap:8px}
+  .output-wrap input{min-width:0}
+  .copy-btn{min-width:72px}
+  .actions{gap:8px}
+  .actions .btn,.bottom-actions .btn{flex:1 1 130px}
+  .back,.back-area,.back-wrap{text-align:center}
+  .back .btn,.back-area>.btn,.back-wrap>.btn{max-width:100%}
+  footer{padding:34px 14px!important}
+}
+@media(max-width:420px){
+  .nav-container{width:calc(100% - 20px)!important}
+  .brand-name{font-size:20px!important;letter-spacing:-.8px}
+  .brand-mark{width:28px;height:28px}
+  .container,.content,.page{width:calc(100% - 20px)!important}
+  .hero h1{font-size:clamp(29px,9vw,38px)!important}
+  .checker-box,.generator,.pin-card{padding:14px!important}
+  .output-wrap{flex-direction:column}
+  .output-wrap .copy-btn{width:100%}
+  .options-grid{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
